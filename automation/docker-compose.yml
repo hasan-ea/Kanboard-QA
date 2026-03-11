@@ -1,0 +1,41 @@
+name: kanboard
+
+services:
+  app:
+    image: kanboard/kanboard:v1.2.51
+    container_name: kanboard-app
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - kanboard_data:/var/www/app/data
+      - kanboard_plugins:/var/www/app/plugins
+    environment:
+      DATABASE_URL: mysql://kanboard:kanboard-secret@db/kanboard
+      PLUGIN_INSTALLER: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:lts
+    container_name: kanboard-db
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root-secret
+      MYSQL_DATABASE: kanboard
+      MYSQL_USER: kanboard
+      MYSQL_PASSWORD: kanboard-secret
+    volumes:
+      - kanboard_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  kanboard_data:
+  kanboard_plugins:
+  kanboard_db:
