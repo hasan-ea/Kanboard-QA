@@ -12,3 +12,7 @@ At the moment, I am mainly working on:
 - setting up the automation foundation with **Java, Maven, Selenium, and TestNG**
 
 The goal is to grow this repository into an end-to-end QA project that includes analysis, manual testing, UI automation, and API testing.
+
+## Automation skeleton
+
+A minimal automation project skeleton for Kanboard QA is available under `automation/` with Java, Maven, Selenium, TestNG, and Page Object Model structure focused on the Create Project module.
