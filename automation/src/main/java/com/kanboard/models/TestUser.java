@@ -1,4 +1,4 @@
 package com.kanboard.models;
 
-public class UserData {
+public class TestUser {
 }
