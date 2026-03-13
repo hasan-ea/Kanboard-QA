@@ -1,4 +1,7 @@
 package com.kanboard.models;
 
-public class ApplicationRole {
+public enum ApplicationRole {
+    ADMINISTRATOR,
+    MANAGER,
+    USER
 }
