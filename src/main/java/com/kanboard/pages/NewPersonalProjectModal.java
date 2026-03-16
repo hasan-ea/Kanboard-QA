@@ -52,8 +52,9 @@ public class NewPersonalProjectModal {
         ).click();
     }
 
-    public void createProject(String projectName) {
+    public ProjectSummaryPage createProject(String projectName) {
         enterProjectName(projectName);
         clickSave();
+        return new ProjectSummaryPage(driver);
     }
 }
