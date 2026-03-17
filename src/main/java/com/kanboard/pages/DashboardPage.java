@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 public class DashboardPage extends BasePage {
 
     private final By dashboardTitle = By.cssSelector("div.title-container");
-    private final By newProjectLink = By.cssSelector("#main > div > ul > li:nth-child(1) > a");
-    private final By newPersonalProjectLink = By.cssSelector("a[href='/project/create/personal']");
+    private final By newProjectLink = By.cssSelector("div.page-header a[href=\"/project/create\"]");
+    private final By newPersonalProjectLink = By.cssSelector("div.page-header a[href='/project/create/personal']");
 
     public DashboardPage(WebDriver driver) {
         super(driver);
