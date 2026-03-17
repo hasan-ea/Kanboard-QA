@@ -1,24 +1,18 @@
 package com.kanboard.pages;
 
+import com.kanboard.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 // Proje oluşturulduktan sonra açılan proje ana/özet ekranını yönetir.
-public class ProjectSummaryPage {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class ProjectSummaryPage extends BasePage {
 
     private final By projectTitle = By.cssSelector("div.title-container");
     private final By summarySectionTitle = By.cssSelector("section h2");
 
     public ProjectSummaryPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
 
     public boolean isProjectSummaryPageDisplayed() {

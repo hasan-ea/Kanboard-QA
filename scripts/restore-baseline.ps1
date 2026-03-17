@@ -1,4 +1,5 @@
-$backupFile = ".\db-backup\kanboard-baseline.sql"
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$backupFile = Join-Path $projectRoot "db-backup\kanboard-baseline.sql"
 
 if (-Not (Test-Path $backupFile)) {
     Write-Host "Baseline SQL file not found: $backupFile"

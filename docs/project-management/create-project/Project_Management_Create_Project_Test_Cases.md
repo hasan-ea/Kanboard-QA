@@ -103,40 +103,40 @@ Bu sıra:
 - **Coverage Type:** Core Regression
 - **Layer:** UI
 - **Preconditions:**
-    - `U_ADMIN` ve `U_MANAGER` hesapları erişilebilir olmalı.
-    - Kullanıcılar create ekranına ulaşabilmeli.
-    - Disposable project name üretimi hazır olmalı.
+  - `U_ADMIN` ve `U_MANAGER` hesapları erişilebilir olmalı.
+  - Kullanıcılar team project create ekranına ulaşabilmeli.
+  - Disposable project name üretimi hazır olmalı.
 - **Test Data:**
-    - Role Matrix:
-        - `U_ADMIN`
-        - `U_MANAGER`
-    - Project Type: `Team`
-    - Project Name Pattern: `QA_PM_CP_TEAM_AUTH_<role>_<timestamp>`
+  - Role Matrix:
+    - `U_ADMIN`
+    - `U_MANAGER`
+  - Project Type: `Team`
+  - Project Name Pattern: `QA_PM_CP_TEAM_AUTH_<role>_<timestamp>`
 - **Steps:**
-    1. İlk veri seti ile giriş yap.
-    2. Team project create akışını aç.
-    3. Benzersiz ve geçerli project name gir.
-    4. Team project olarak submit et.
-    5. Başarı mesajı, landing page veya ilgili redirect sonucunu gözlemle.
-    6. Açılan ekranda proje adını doğrula.
-    7. Aynı akışı ikinci veri seti ile tekrar et.
+  1. İlk veri seti ile giriş yap.
+  2. Team project create akışını aç.
+  3. Benzersiz ve geçerli bir project name gir.
+  4. Team project olarak submit et.
+  5. Submit sonrası başarı sonucu veya create ile tutarlı redirect davranışını gözlemle.
+  6. Açılan ekranda proje adını doğrula.
+  7. Aynı akışı ikinci veri seti ile tekrar et.
 - **Expected Results:**
-    - Her iki yetkili rol de team project create akışına erişebilmelidir.
-    - Submit sonrası işlem hata vermeden tamamlanmalıdır.
-    - Oluşturulan proje adı girilen veri ile eşleşmelidir.
-    - Kullanıcı, yeni oluşturulan projenin sayfasına veya bunu açıkça gösteren ekrana yönlendirilmelidir.
-    - Aynı isimle ikinci kez beklenmeyen duplicate kayıt oluşmamalıdır.
+  - `U_ADMIN` ve `U_MANAGER` team project create akışına erişebilmelidir.
+  - Submit sonrası işlem hata vermeden tamamlanmalıdır.
+  - Kullanıcı yeni oluşturulan projenin sayfasına veya bunu açıkça gösteren tutarlı bir ekrana yönlendirilmelidir.
+  - Oluşturulan proje adı girilen veri ile eşleşmelidir.
+  - Her veri seti kendi disposable projesini bağımsız olarak oluşturabilmelidir.
 - **Postconditions / Cleanup:**
-    - Her iki veri seti ile oluşturulan disposable projeler silinmelidir.
+  - Her iki veri seti ile oluşturulan disposable projeler silinmelidir.
 - **Dependency:**
-    - Seeded role accounts gerekir.
-    - Cleanup helper önerilir.
+  - Seeded role accounts gerekir.
+  - Cleanup helper önerilir.
 - **Automation Candidate Note:**
-    - Güçlü UI smoke ve regression adayıdır.
-    - TestNG `@DataProvider` ile rol bazlı tekrar azaltılmalıdır.
+  - Güçlü UI smoke ve regression adayıdır.
+  - TestNG `@DataProvider` ile rol bazlı tekrar azaltılmalıdır.
 - **Traceability Note:**
-    - BR-CP-01, BR-CP-02, BR-CP-05
-    - PM-CP-001
+  - BR-CP-01, BR-CP-02, BR-CP-05
+  - PM-CP-001
 
 ---
 
@@ -149,37 +149,37 @@ Bu sıra:
 - **Coverage Type:** Core Regression
 - **Layer:** UI
 - **Preconditions:**
-    - `U_USER` aktif olmalı.
-    - Personal project create giriş noktası erişilebilir olmalı.
-    - Benzersiz project name üretimi hazır olmalı.
+  - `U_USER` aktif olmalı.
+  - Personal project create giriş noktası erişilebilir olmalı.
+  - Benzersiz project name üretimi hazır olmalı.
 - **Test Data:**
-    - User Role: `U_USER`
-    - Project Type: `Personal`
-    - Project Name: `QA_PM_CP_PERSONAL_USER_<timestamp>`
+  - User Role: `U_USER`
+  - Project Type: `Personal`
+  - Project Name: `QA_PM_CP_PERSONAL_USER_<timestamp>`
 - **Steps:**
-    1. `U_USER` ile giriş yap.
-    2. Personal project create akışını aç.
-    3. Benzersiz geçerli project name gir.
-    4. Formu submit et.
-    5. Başarı mesajı / landing sonucu gözlemle.
-    6. Açılan ekranda proje adını doğrula.
-    7. Kullanıcının proje listesi veya dashboard alanında projenin görünürlüğünü kontrol et.
+  1. `U_USER` ile giriş yap.
+  2. Personal project create akışını aç.
+  3. Benzersiz ve geçerli project name gir.
+  4. Formu submit et.
+  5. Başarı sonucu veya create ile tutarlı landing davranışını gözlemle.
+  6. Açılan ekranda proje adını doğrula.
+  7. Kullanıcının proje listesi, dashboard veya güvenilir bir UI noktasında projenin görünürlüğünü kontrol et.
 - **Expected Results:**
-    - Standart kullanıcı personal project create akışına erişebilmelidir.
-    - İşlem başarıyla tamamlanmalıdır.
-    - Oluşturulan proje kullanıcıya görünür olmalıdır.
-    - Proje adı girilen veriyle birebir eşleşmelidir.
-    - Sistem team project davranışına yanlışlıkla geçmemelidir.
+  - Standart kullanıcı personal project create akışına erişebilmelidir.
+  - İşlem başarıyla tamamlanmalıdır.
+  - Kullanıcı yeni oluşturulan personal project'i kendi perspektifinde görebilmelidir.
+  - Proje adı girilen veriyle birebir eşleşmelidir.
+  - Oluşan kayıt personal project create akışıyla tutarlı UI state göstermelidir.
 - **Postconditions / Cleanup:**
-    - Oluşturulan personal project silinmelidir.
+  - Oluşturulan personal project silinmelidir.
 - **Dependency:**
-    - Seeded `U_USER` gerekir.
+  - Seeded `U_USER` gerekir.
 - **Automation Candidate Note:**
-    - İlk dalga UI smoke için çok güçlü adaydır.
-    - Personal project akışı için ayrı page object method’u tutulması bakım kolaylığı sağlar.
+  - İlk dalga UI smoke için güçlü adaydır.
+  - Personal project akışı için ayrı page object method'u tutulması bakım kolaylığı sağlar.
 - **Traceability Note:**
-    - BR-CP-01, BR-CP-03, BR-CP-05
-    - PM-CP-002
+  - BR-CP-01, BR-CP-03, BR-CP-05
+  - PM-CP-002
 
 ---
 
@@ -192,36 +192,36 @@ Bu sıra:
 - **Coverage Type:** Core Regression
 - **Layer:** UI
 - **Preconditions:**
-    - Geçerli create yapabilecek kullanıcı hazır olmalı.
-    - Benzersiz geçerli project name hazır olmalı.
+  - Geçerli create yapabilecek tek bir kullanıcı hazır olmalı.
+  - Benzersiz geçerli project name hazır olmalı.
 - **Test Data:**
-    - User Role: `U_ADMIN` veya `U_USER`
-    - Project Type: scope’a uygun geçerli tip
-    - Project Name: `QA_PM_CP_VISIBILITY_<timestamp>`
+  - User Role: `U_ADMIN`
+  - Project Type: `Team`
+  - Project Name: `QA_PM_CP_VISIBILITY_<timestamp>`
 - **Steps:**
-    1. Geçerli kullanıcı ile giriş yap.
-    2. İlgili create akışını aç.
-    3. Geçerli project name gir ve formu submit et.
-    4. Submit sonrası gösterilen success feedback’i gözlemle.
-    5. Redirect edilen ekranı doğrula.
-    6. Yeni proje adının hedef ekranda göründüğünü doğrula.
-    7. Dashboard / listing / current project header üzerinden kayıt görünürlüğünü tekrar doğrula.
+  1. Geçerli kullanıcı ile giriş yap.
+  2. İlgili create akışını aç.
+  3. Geçerli project name gir ve formu submit et.
+  4. Submit sonrası gösterilen başarı sonucunu gözlemle.
+  5. Redirect edilen ekranı doğrula.
+  6. Yeni proje adının hedef ekranda göründüğünü doğrula.
+  7. Dashboard, listing veya current project header üzerinden kayıt görünürlüğünü tekrar doğrula.
 - **Expected Results:**
-    - Kullanıcı başarısızlık mesajı görmemelidir.
-    - Kullanıcı başarıyı gösteren net bir UI sonucu almalıdır.
-    - Redirect hedefi create sonrası akışla tutarlı olmalıdır.
-    - Oluşturulan kayıt en az bir güvenilir UI noktada görünmelidir.
-    - Görünen proje adı submit edilen veri ile eşleşmelidir.
+  - Kullanıcı başarısızlık mesajı görmemelidir.
+  - Kullanıcı başarıyı gösteren net bir UI sonucu almalıdır.
+  - Redirect hedefi create sonrası akışla tutarlı olmalıdır.
+  - Oluşturulan kayıt en az bir güvenilir UI noktada görünmelidir.
+  - Görünen proje adı submit edilen veri ile eşleşmelidir.
 - **Postconditions / Cleanup:**
-    - Oluşturulan proje cleanup ile silinmelidir.
+  - Oluşturulan proje cleanup ile silinmelidir.
 - **Dependency:**
-    - Test içinde create yapılır; başka testin bıraktığı veri kullanılmaz.
+  - Test içinde create yapılır; başka testin bıraktığı veri kullanılmaz.
 - **Automation Candidate Note:**
-    - UI navigation ve visibility doğrulaması için güçlü adaydır.
-    - Assertion’lar toast/message’a değil yalnızca kalıcı UI state’e de dayanmalıdır.
+  - UI navigation ve visibility doğrulaması için güçlü adaydır.
+  - Bu case, create yetki doğrulamasından çok create sonrası kalıcı UI state'i hedeflemelidir.
 - **Traceability Note:**
-    - BR-CP-05
-    - PM-CP-003
+  - BR-CP-05, BR-CP-07
+  - PM-CP-003
 
 ---
 
@@ -307,38 +307,39 @@ Bu sıra:
 ## TC-PM-CP-006
 - **Test Case ID:** TC-PM-CP-006
 - **Related Scenario ID:** PM-CP-006
-- **Test Case Title:** Unauthorized user User API üzerinden team project oluşturamamalı
+- **Test Case Title:** Unauthorized user User API üzerinden yetkisiz project create isteğinde başarılı sonuç alamamalı
 - **Purpose:** Backend seviyesinde authorization enforcement doğrulamasını yapmak.
 - **Priority:** Critical
 - **Coverage Type:** Core Regression
 - **Layer:** API
 - **Preconditions:**
-    - `U_USER` için User API credentials hazır olmalı.
-    - JSON-RPC endpoint erişilebilir olmalı.
+  - `U_USER` için User API credentials hazır olmalı.
+  - JSON-RPC endpoint erişilebilir olmalı.
 - **Test Data:**
-    - API User: `U_USER`
-    - Project Name: `QA_PM_CP_UNAUTH_API_<timestamp>`
-    - Procedure: `createProject`
+  - API User: `U_USER`
+  - Project Name: `QA_PM_CP_UNAUTH_API_<timestamp>`
+  - Procedure: `createProject`
 - **Steps:**
-    1. `U_USER` credentials ile User API isteği hazırla.
-    2. Team project create amacıyla `createProject` isteğini gönder.
-    3. Dönen API sonucunu kaydet.
-    4. Aynı isim için `getProjectByName` veya eşdeğer okuma yöntemiyle kayıt araması yap.
+  1. `U_USER` credentials ile User API isteği hazırla.
+  2. Yetkisiz create amacıyla `createProject` isteğini gönder.
+  3. Dönen API sonucunu kaydet.
+  4. Aynı isim için `getProjectByName` veya eşdeğer read çağrısı yap.
+  5. Kalıcı kayıt oluşup oluşmadığını doğrula.
 - **Expected Results:**
-    - İstek yetki nedeniyle başarılı create sonucu üretmemelidir.
-    - API sonucu authorization reddini veya başarısız create sonucunu göstermelidir.
-    - Aynı isimle kalıcı proje kaydı bulunmamalıdır.
-    - Backend, UI kuralını delmeye izin vermemelidir.
+  - Yetkisiz kullanıcı create isteğinde başarılı sonuç alamamalıdır.
+  - API cevabı authorization failure, rejected result veya create başarısızlığı ile tutarlı olmalıdır.
+  - Aynı isimle kalıcı proje kaydı oluşmamalıdır.
+  - Backend tarafında privilege escalation olmamalıdır.
 - **Postconditions / Cleanup:**
-    - Kayıt oluşmamalıdır; oluşursa defect olarak işaretlenmeli ve cleanup yapılmalıdır.
+  - Kayıt oluşmaması beklenir; oluşursa defect + cleanup gerekir.
 - **Dependency:**
-    - User API auth helper gerekir.
+  - API read helper gerekir.
 - **Automation Candidate Note:**
-    - RBAC doğrulaması için en kritik API case’lerden biridir.
-    - Response assertion + record absence assertion birlikte kullanılmalıdır.
+  - API authorization regression için güçlü adaydır.
+  - Assertion yalnız response status'a değil kalıcı veri yokluğuna da dayanmalıdır.
 - **Traceability Note:**
-    - BR-CP-02, BR-CP-06, BR-CP-07, BR-CP-08
-    - PM-CP-006
+  - BR-CP-02, BR-CP-06, BR-CP-08
+  - PM-CP-006
 
 ---
 
@@ -381,40 +382,41 @@ Bu sıra:
 ## TC-PM-CP-008
 - **Test Case ID:** TC-PM-CP-008
 - **Related Scenario ID:** PM-CP-008
-- **Test Case Title:** Whitespace-only ve trim-sensitive project name girdileri tutarlı şekilde reddedilmeli
+- **Test Case Title:** Whitespace-only ve trim-sensitive project name girdileri tutarlı şekilde reddedilmeli veya kontrollü şekilde ele alınmalı
 - **Purpose:** Input sanitization ve weak validation risklerini matrix yaklaşımıyla doğrulamak.
 - **Priority:** High
 - **Coverage Type:** Extended Coverage
 - **Layer:** UI
 - **Preconditions:**
-    - Create ekranı erişilebilir olmalı.
+  - Create ekranı erişilebilir olmalı.
 - **Test Data:**
-    - Invalid Input Matrix:
-        - `" "`
-        - `"     "`
-        - `"\t"`
-        - `"  QA_PM_CP_TRIM_ONLY  "` *(beklenen davranış: trim sonrası geçerliyse kalıcı isim sanitize edilmiş şekilde saklanmalı; ürün davranışı farklıysa mevcut davranış karar notuna çevrilmeli)*
-    - Project Type: geçerli bir create tipi
+  - Invalid Input Matrix:
+    - `" "`
+    - `"     "`
+    - `"\t"`
+    - `"  QA_PM_CP_TRIM_ONLY_<timestamp>  "` *(ürün kabul ederse sanitize edilmiş final değer deterministik olmalı; reddederse kayıt oluşmamalı)*
+  - Project Type: geçerli bir create tipi
 - **Steps:**
-    1. İlk invalid input ile create denemesi yap.
-    2. Validation sonucu ve submit sonrası UI state’i kaydet.
-    3. Kalan veri setleri için aynı akışı tekrarla.
-    4. Trim-sensitive veri setinde kabul varsa oluşan nihai proje adını kontrol et.
+  1. İlk invalid input ile create denemesi yap.
+  2. Validation sonucu ve submit sonrası UI state'i kaydet.
+  3. Kalan veri setleri için aynı akışı tekrarla.
+  4. Trim-sensitive veri setinde kabul varsa oluşan nihai proje adını kontrol et.
 - **Expected Results:**
-    - Whitespace-only girdiler create’i başarıyla tamamlayamamalıdır.
-    - Boş gibi davranması gereken girdiler için kalıcı kayıt oluşmamalıdır.
-    - Trim-sensitive giriş kabul ediliyorsa sistem deterministik davranmalı ve proje adı belirsiz/bozuk biçimde kaydedilmemelidir.
-    - Test sonucu, aynı veri seti için tekrar koşulabilir ve tutarlı olmalıdır.
+  - Whitespace-only girdiler create'i başarıyla tamamlayamamalıdır.
+  - Boş gibi davranması gereken girdiler için kalıcı kayıt oluşmamalıdır.
+  - Trim-sensitive giriş kabul ediliyorsa sistem deterministik davranmalı ve proje adı belirsiz veya bozuk biçimde kaydedilmemelidir.
+  - Aynı veri seti tekrar koşulduğunda tutarlı sonuç alınmalıdır.
 - **Postconditions / Cleanup:**
-    - Kayıt oluşursa cleanup yapılmalıdır.
+  - Kayıt oluşursa cleanup yapılmalıdır.
 - **Dependency:**
-    - Yok.
+  - Yok.
 - **Automation Candidate Note:**
-    - Data-driven UI validation için uygundur.
-    - Trim-sensitive varyasyon için first-run baseline sonucu sabitlenmelidir.
+  - Data-driven UI validation için uygundur.
+  - Trim-sensitive varyasyon için first-run baseline sonucu sabitlenmelidir.
+  - Bu case ilk dalga blocking regression yerine controlled extended suite altında tutulmalıdır.
 - **Traceability Note:**
-    - BR-CP-06, BR-CP-09
-    - PM-CP-008
+  - BR-CP-06, BR-CP-09
+  - PM-CP-008
 
 ---
 
@@ -427,30 +429,34 @@ Bu sıra:
 - **Coverage Type:** Core Regression
 - **Layer:** Hybrid
 - **Preconditions:**
-    - UI create ekranı ve User API erişimi hazır olmalı.
-    - Benzersiz invalid test adı belirlenmiş olmalı.
+  - UI create ekranı ve User API erişimi hazır olmalı.
+  - Benzersiz invalid test adı belirlenmiş olmalı.
 - **Test Data:**
-    - Invalid Name: whitespace-only veya boş değer
-    - Lookup Name: negatif deneme için üretilen benzersiz aday isim
+  - Invalid Name: `"  QA_PM_CP_NEG_TRIM_<timestamp>  "`
+  - Lookup Variants:
+    - raw input değeri
+    - trimmed value: `QA_PM_CP_NEG_TRIM_<timestamp>`
 - **Steps:**
-    1. UI üzerinden invalid veri ile create denemesi yap.
-    2. UI’nin create’i reddettiğini doğrula.
-    3. Aynı test adı ile User API üzerinden proje araması yap.
-    4. Kayıt bulunup bulunmadığını doğrula.
+  1. UI üzerinden invalid veya trim-sensitive negatif veri ile create denemesi yap.
+  2. UI'nin create'i reddettiğini veya deterministik olmayan başarı üretmediğini doğrula.
+  3. Raw input varyasyonu için User API üzerinden proje araması yap.
+  4. Trimmed varyasyon için de User API üzerinden proje araması yap.
+  5. Beklenmeyen kalıcı kayıt oluşup oluşmadığını doğrula.
 - **Expected Results:**
-    - UI create’i tamamlamamalıdır.
-    - Backend tarafında aynı isimle kalıcı proje kaydı bulunmamalıdır.
-    - Negatif deneme sonrasında unintended side effect oluşmamalıdır.
+  - UI create'i başarılı tamamlamamalıdır.
+  - Raw input veya trimmed varyasyon altında unintended kalıcı kayıt oluşmamalıdır.
+  - Negatif deneme sonrasında backend tarafında side effect bırakılmamalıdır.
+  - UI sonucu ile API tarafındaki absence sonucu birbiriyle tutarlı olmalıdır.
 - **Postconditions / Cleanup:**
-    - Kayıt bulunmaması beklenir; bulunursa defect + cleanup gerekir.
+  - Kayıt bulunmaması beklenir; bulunursa defect + cleanup gerekir.
 - **Dependency:**
-    - UI validation ve API lookup yardımcıları gerekir.
+  - UI validation ve API lookup yardımcıları gerekir.
 - **Automation Candidate Note:**
-    - En güçlü hybrid negatif case’lerden biridir.
-    - Negatif UI assertion ile API absence assertion birlikte tutulmalıdır.
+  - Güçlü hybrid negatif case'tir.
+  - Negatif UI assertion ile API absence assertion birlikte tutulmalıdır.
 - **Traceability Note:**
-    - BR-CP-06, BR-CP-08
-    - PM-CP-009
+  - BR-CP-06, BR-CP-08
+  - PM-CP-009
 
 ---
 
@@ -504,68 +510,68 @@ Bu sıra:
 - **Coverage Type:** Extended Coverage
 - **Layer:** Hybrid
 - **Preconditions:**
-    - `U_USER` ile personal project create yapılabilir olmalı.
-    - Erişim sonucu karşılaştırması için en az bir farklı kullanıcı hazır olmalı.
+  - `U_USER` ile personal project create yapılabilir olmalı.
+  - Erişim sonucu karşılaştırması için en az bir farklı standart kullanıcı hazır olmalı.
 - **Test Data:**
-    - Owner User: `U_USER`
-    - Secondary User: `U_MANAGER` veya farklı standart kullanıcı
-    - Project Name: `QA_PM_CP_PERSONAL_ACCESS_<timestamp>`
+  - Owner User: `U_USER`
+  - Secondary User: `U_USER_2`
+  - Project Name: `QA_PM_CP_PERSONAL_ACCESS_<timestamp>`
 - **Steps:**
-    1. `U_USER` ile personal project oluştur.
-    2. Owner olarak proje görünürlüğünü ve erişimini doğrula.
-    3. Gerekli doğrulama yöntemiyle ikinci kullanıcı perspektifinden aynı projeye erişimi dene veya görünürlüğünü kontrol et.
-    4. Mümkünse User API ile owner perspective üzerinden proje kaydını doğrula.
+  1. `U_USER` ile personal project oluştur.
+  2. Owner olarak proje görünürlüğünü ve erişimini doğrula.
+  3. `U_USER_2` perspektifinden aynı projeye erişimi dene veya görünürlüğünü kontrol et.
+  4. Mümkünse User API ile owner perspective üzerinden proje kaydını doğrula.
 - **Expected Results:**
-    - Owner oluşturduğu personal project’i görebilmeli ve erişebilmelidir.
-    - Personal project team project gibi geniş erişim modeli göstermemelidir.
-    - Yetkisiz kullanıcı aynı projeyi normal team project gibi görememeli veya yönetememelidir.
-    - Persistence kaydı oluşturulan project ile tutarlı olmalıdır.
+  - Owner oluşturduğu personal project'i görebilmeli ve erişebilmelidir.
+  - Personal project team project gibi geniş erişim modeli göstermemelidir.
+  - İkinci standart kullanıcı aynı projeyi normal team project gibi görememeli veya yönetememelidir.
+  - Persistence kaydı oluşturulan project ile tutarlı olmalıdır.
 - **Postconditions / Cleanup:**
-    - Oluşturulan personal project silinmelidir.
+  - Oluşturulan personal project silinmelidir.
 - **Dependency:**
-    - Çok kullanıcıyla doğrulama gerektiği için seeded users gerekir.
+  - Çok kullanıcılı doğrulama için seeded users gerekir.
 - **Automation Candidate Note:**
-    - Hybrid suite için iyi bir orta seviye coverage case’idir.
-    - İkinci kullanıcı perspektifi API veya UI ile maliyeti düşük yoldan doğrulanmalıdır.
+  - Hybrid suite için iyi bir orta seviye coverage case'idir.
+  - İkinci kullanıcı perspektifi API veya UI ile maliyeti düşük yoldan doğrulanmalıdır.
 - **Traceability Note:**
-    - BR-CP-01, BR-CP-03, BR-CP-04, BR-CP-05
-    - PM-CP-011
+  - BR-CP-01, BR-CP-03, BR-CP-04, BR-CP-05
+  - PM-CP-011
 
 ---
 
 ## TC-PM-CP-012
 - **Test Case ID:** TC-PM-CP-012
 - **Related Scenario ID:** PM-CP-012
-- **Test Case Title:** Team project oluşturulduğunda personal project gibi izole davranmamalı
+- **Test Case Title:** Team project oluşturulduğunda team modeline uygun temel yönetim yüzeyi göstermeli
 - **Purpose:** Team project create sonrası başlangıç davranışının personal modelle karışmadığını doğrulamak.
 - **Priority:** High
 - **Coverage Type:** Extended Coverage
 - **Layer:** UI
 - **Preconditions:**
-    - `U_ADMIN` veya `U_MANAGER` ile team project create yapılabilir olmalı.
+  - `U_ADMIN` veya `U_MANAGER` ile team project create yapılabilir olmalı.
 - **Test Data:**
-    - Creator Role: `U_ADMIN` veya `U_MANAGER`
-    - Project Name: `QA_PM_CP_TEAM_MODEL_<timestamp>`
+  - Creator Role: `U_ADMIN`
+  - Project Name: `QA_PM_CP_TEAM_MODEL_<timestamp>`
 - **Steps:**
-    1. Yetkili rol ile team project oluştur.
-    2. Oluşturulan proje sayfasını aç.
-    3. Team project’e ait başlangıç davranışını gösteren alanları kontrol et.
-    4. Personal project’e özgü izolasyon davranışının burada beklenmediğini doğrula.
+  1. Yetkili rol ile team project oluştur.
+  2. Oluşturulan proje sayfasını aç.
+  3. Team project'e ait temel yönetim veya ayar yüzeylerinden en az birini kontrol et.
+  4. Personal project'e özgü izole davranışın burada baskın başlangıç modeli olmadığını doğrula.
 - **Expected Results:**
-    - Team project başarıyla oluşmalıdır.
-    - Oluşan proje personal project akışıyla karışmamalıdır.
-    - Team modeline uygun yönetim / ayar / görünürlük yüzeyi bulunmalıdır.
-    - Project type sonucu create akışıyla tutarlı olmalıdır.
+  - Team project başarıyla oluşmalıdır.
+  - Oluşan proje personal project akışıyla karışmamalıdır.
+  - Team modeline uygun en az bir somut yönetim, ayar veya görünürlük yüzeyi bulunmalıdır.
+  - Görünen proje state'i create akışıyla tutarlı olmalıdır.
 - **Postconditions / Cleanup:**
-    - Oluşturulan team project silinmelidir.
+  - Oluşturulan team project silinmelidir.
 - **Dependency:**
-    - Foundation team create davranışı gerekir; ancak proje test içinde oluşturulmalıdır.
+  - Foundation team create davranışı gerekir; ancak proje test içinde oluşturulmalıdır.
 - **Automation Candidate Note:**
-    - UI tarafında type-specific smoke olarak tutulabilir.
-    - Over-assertion yapılmamalı; yalnızca create modülüyle doğrudan ilişkili farklar doğrulanmalıdır.
+  - UI tarafında type-specific smoke veya targeted extended coverage olarak tutulabilir.
+  - Over-assertion yapılmamalı; yalnızca create modülüyle doğrudan ilişkili farklar doğrulanmalıdır.
 - **Traceability Note:**
-    - BR-CP-01, BR-CP-02, BR-CP-05
-    - PM-CP-012
+  - BR-CP-01, BR-CP-02, BR-CP-05
+  - PM-CP-012
 
 ---
 

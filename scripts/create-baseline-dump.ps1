@@ -1,5 +1,6 @@
-$backupDirectory = ".\db-backup"
-$backupFile = ".\db-backup\kanboard-baseline.sql"
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$backupDirectory = Join-Path $projectRoot "db-backup"
+$backupFile = Join-Path $backupDirectory "kanboard-baseline.sql"
 
 if (-Not (Test-Path $backupDirectory)) {
     New-Item -ItemType Directory -Path $backupDirectory | Out-Null

@@ -1,38 +1,42 @@
 package com.kanboard.pages;
 
+import com.kanboard.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 // Login sonrası açılan dashboard ekranındaki temel aksiyonları yönetir.
-public class DashboardPage {
-
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class DashboardPage extends BasePage {
 
     private final By dashboardTitle = By.cssSelector("div.title-container");
-    private final By newPersonalProjectLink = By.cssSelector("div[class='page-header'] li:nth-child(1) a:nth-child(1)");
+    private final By newProjectLink = By.cssSelector("#main > div > ul > li:nth-child(1) > a");
+    private final By newPersonalProjectLink = By.cssSelector("a[href='/project/create/personal']");
 
     public DashboardPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
 
+    // Dashboard açıldı mı
     public boolean isDashboardDisplayed() {
-        return wait.until(
-                ExpectedConditions.textToBePresentInElementLocated(dashboardTitle, "Dashboard")
-        );
+        return getText(dashboardTitle).contains("Dashboard");
     }
 
+    // New project linkine tıkla
+    public void clickNewProject() {
+        click(newProjectLink);
+    }
+
+    // New project modalını aç
+    public NewProjectModal goToNewProjectModal() {
+        clickNewProject();
+        return new NewProjectModal(driver);
+    }
+
+    // New personal project linkine tıkla
     public void clickNewPersonalProject() {
-        wait.until(
-                ExpectedConditions.elementToBeClickable(newPersonalProjectLink)
-        ).click();
+        click(newPersonalProjectLink);
     }
 
+    // New personal project modalını aç
     public NewPersonalProjectModal goToNewPersonalProjectModal() {
         clickNewPersonalProject();
         return new NewPersonalProjectModal(driver);
