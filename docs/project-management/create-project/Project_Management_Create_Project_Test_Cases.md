@@ -229,39 +229,43 @@ Bu sıra:
 - **Test Case ID:** TC-PM-CP-004
 - **Related Scenario ID:** PM-CP-004
 - **Test Case Title:** Role-based create option exposure matrix UI seviyesinde doğrulanmalı
-- **Purpose:** Farklı application role’lerde hangi create seçeneğinin görünür veya erişilebilir olduğunu matrix yaklaşımıyla doğrulamak.
+- **Purpose:** Farklı application role’lerde create giriş noktalarının görünürlüğünü ve UI seviyesindeki erişilebilir surface davranışını matrix yaklaşımıyla doğrulamak.
 - **Priority:** High
 - **Coverage Type:** Extended Coverage
 - **Layer:** UI
 - **Preconditions:**
-    - `U_ADMIN`, `U_MANAGER`, `U_USER` hesapları hazır olmalı.
+  - `U_ADMIN`, `U_MANAGER`, `U_USER` hesapları hazır olmalı.
 - **Test Data:**
-    - Role Matrix:
-        - `U_ADMIN` → Team create erişilebilir, Personal create erişilebilir
-        - `U_MANAGER` → Team create erişilebilir, Personal create erişilebilir
-        - `U_USER` → Team create erişilemez veya başarılı submit yoluna sahip olmamalı, Personal create erişilebilir
+  - Role Matrix:
+    - `U_ADMIN` → Team create görünür, Personal create görünür
+    - `U_MANAGER` → Team create görünür, Personal create görünür
+    - `U_USER` → Team create görünmez, Personal create görünür
 - **Steps:**
-    1. `U_ADMIN` ile giriş yap ve create giriş noktalarını gözlemle.
-    2. Görünen create seçeneklerini veya project type seçeneklerini kaydet.
-    3. `U_MANAGER` ile aynı kontrolü yap.
-    4. `U_USER` ile aynı kontrolü yap.
-    5. Gerekirse team create seçeneği görünmese bile URL/direct access yüzeyi olup olmadığını kontrol et.
+  1. `U_ADMIN` ile giriş yap.
+  2. Dashboard veya ilgili create surface üzerinde görünen create giriş noktalarını gözlemle.
+  3. Team project create ve personal project create seçeneklerinin görünürlük durumunu kaydet.
+  4. `U_MANAGER` ile aynı kontrolleri tekrarla.
+  5. `U_USER` ile aynı kontrolleri tekrarla.
 - **Expected Results:**
-    - `U_ADMIN` ve `U_MANAGER` team project create yolunu görebilmeli veya erişebilmelidir.
-    - `U_USER` için personal project create yolu erişilebilir olmalıdır.
-    - `U_USER` için team project create yolu görünmemeli, seçilememeli veya geçerli create akışına dönüşmemelidir.
-    - UI yüzeyi role kuralıyla çelişmemelidir.
+  - `U_ADMIN` için team project create seçeneği görünür olmalıdır.
+  - `U_ADMIN` için personal project create seçeneği görünür olmalıdır.
+  - `U_MANAGER` için team project create seçeneği görünür olmalıdır.
+  - `U_MANAGER` için personal project create seçeneği görünür olmalıdır.
+  - `U_USER` için personal project create seçeneği görünür olmalıdır.
+  - `U_USER` için team project create seçeneği görünmemelidir.
+  - UI surface role kuralıyla çelişmemelidir.
 - **Postconditions / Cleanup:**
-    - Veri üretilmezse cleanup gerekmez.
+  - Veri üretilmezse cleanup gerekmez.
 - **Dependency:**
-    - Seeded role accounts gerekir.
-    - PM-CP-005 ile aynı yetki alanını paylaşır; ancak bu case surface doğrulamasıdır.
+  - Seeded role accounts gerekir.
+  - Bu case UI surface/visibility doğrulamasıdır.
+  - Team project create için direct access veya unauthorized create enforcement doğrulaması ayrı authorization testlerinde ele alınmalıdır.
 - **Automation Candidate Note:**
-    - Data-driven UI coverage için uygundur.
-    - Görünürlük ve erişilebilirlik assertion’ları ayrı yardımcı metotlarda tutulmalıdır.
+  - Data-driven UI coverage için uygundur.
+  - Görünürlük assertion’ları ortak yardımcı metotlarda tutulabilir.
 - **Traceability Note:**
-    - BR-CP-02, BR-CP-03
-    - PM-CP-004
+  - BR-CP-02, BR-CP-03
+  - PM-CP-004
 
 ---
 

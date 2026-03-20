@@ -28,6 +28,22 @@ public class DashboardPage extends BasePage {
     }
 
     /**
+     * Yeni proje butonunun görünür olduğunu kontrol eder.
+     */
+    public boolean isNewProjectVisible() {
+        logger.info("'New project' butonunun görünürlüğü kontrol ediliyor");
+        return isVisible(newProjectLink);
+    }
+
+    /**
+     * Yeni kişisel proje butonunun görünür olduğunu kontrol eder.
+     */
+    public boolean isNewPersonalProjectVisible() {
+        logger.info("'New personal project' butonunun görünürlüğü kontrol ediliyor");
+        return isVisible(newPersonalProjectLink);
+    }
+
+    /**
      * Yeni proje oluşturma ekranını açar.
      */
     public void clickNewProject() {
