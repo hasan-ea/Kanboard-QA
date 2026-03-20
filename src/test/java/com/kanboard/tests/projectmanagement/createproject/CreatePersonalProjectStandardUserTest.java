@@ -38,7 +38,7 @@ public class CreatePersonalProjectStandardUserTest extends BaseUiTest {
         );
 
         // Project oluştur
-        ProjectSummaryPage projectSummaryPage = newPersonalProjectModal.createProject(projectName);
+        ProjectSummaryPage projectSummaryPage = newPersonalProjectModal.createPersonalProject(projectName);
 
         // Sonuç doğrulama
         Assert.assertTrue(

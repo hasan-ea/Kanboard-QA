@@ -4,9 +4,10 @@ import com.kanboard.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-// Team / normal project create modalı
+/**
+ * Yeni proje oluşturma modalını yönetir.
+ */
 public class NewProjectModal extends BasePage {
-
 
     private final By projectNameInput = By.cssSelector("#form-name");
     private final By identifierInput = By.cssSelector("#form-identifier");
@@ -16,35 +17,55 @@ public class NewProjectModal extends BasePage {
         super(driver);
     }
 
-    // Modal açıldı mı
+    /**
+     * Modalın görüntülendiğini kontrol eder.
+     */
     public boolean isDisplayed() {
-        return isVisible(projectNameInput);
+        logger.info("Yeni proje oluşturma modalının görüntülendiği doğrulanıyor");
+        boolean displayed = isVisible(projectNameInput);
+        logger.info("Yeni proje oluşturma modalı görünürlük sonucu: {}", displayed);
+        return displayed;
     }
 
-    // Project name gir
+    /**
+     * Proje adını girer.
+     */
     public void enterProjectName(String projectName) {
+        logger.info("Proje adı giriliyor: {}", projectName);
         type(projectNameInput, projectName);
     }
 
-    // Identifier gir
+    /**
+     * Proje identifier alanını doldurur.
+     */
     public void enterIdentifier(String identifier) {
+        logger.info("Proje identifier giriliyor: {}", identifier);
         type(identifierInput, identifier);
     }
 
-    // Kaydet
+    /**
+     * Projeyi kaydeder.
+     */
     public void clickSave() {
+        logger.info("Proje kaydetme işlemi başlatılıyor");
         click(saveButton);
     }
 
-    // Sadece name ile project oluştur
+    /**
+     * Yalnızca proje adıyla proje oluşturur.
+     */
     public ProjectSummaryPage createProject(String projectName) {
+        logger.info("Sadece proje adı ile proje oluşturuluyor: {}", projectName);
         enterProjectName(projectName);
         clickSave();
         return new ProjectSummaryPage(driver);
     }
 
-    // Name + identifier ile project oluştur
+    /**
+     * Proje adı ve identifier ile proje oluşturur.
+     */
     public ProjectSummaryPage createProject(String projectName, String identifier) {
+        logger.info("Proje adı ve identifier ile proje oluşturuluyor. Proje adı: {}", projectName);
         enterProjectName(projectName);
         enterIdentifier(identifier);
         clickSave();

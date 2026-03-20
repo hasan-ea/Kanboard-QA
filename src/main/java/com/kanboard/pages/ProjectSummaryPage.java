@@ -5,25 +5,59 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-// Proje oluşturulduktan sonra açılan proje ana/özet ekranını yönetir.
+/**
+ * Proje oluşturulduktan sonra açılan proje özet ekranını yönetir.
+ */
 public class ProjectSummaryPage extends BasePage {
 
-    private final By projectTitle = By.cssSelector("div.title-container");
+    private final By projectTitle = By.cssSelector("span.title");
     private final By summarySectionTitle = By.cssSelector("section h2");
+    private final By dashboardLink = By.cssSelector("a[href=\"/dashboard\"]");
 
     public ProjectSummaryPage(WebDriver driver) {
         super(driver);
     }
 
+    /**
+     * Proje özet sayfasının görüntülendiğini kontrol eder.
+     */
     public boolean isProjectSummaryPageDisplayed() {
-        return wait.until(
+        logger.info("Project Summary sayfasının görüntülendiği doğrulanıyor");
+        boolean displayed = wait.until(
                 ExpectedConditions.textToBePresentInElementLocated(summarySectionTitle, "Summary")
         );
+        logger.info("Project Summary sayfası görünürlük sonucu: {}", displayed);
+        return displayed;
     }
 
+    /**
+     * Proje adının ekranda görüntülendiğini kontrol eder.
+     */
     public boolean isProjectNameDisplayed(String projectName) {
-        return wait.until(
+        logger.info("Project Summary sayfasında proje adının görüntülendiği doğrulanıyor: {}", projectName);
+        boolean displayed = wait.until(
                 ExpectedConditions.textToBePresentInElementLocated(projectTitle, projectName)
         );
+        logger.info("Project Summary proje adı görünürlük sonucu [{}]: {}", projectName, displayed);
+        return displayed;
+    }
+
+    /**
+     * Sayfadaki proje başlığını döner.
+     */
+    public String getProjectTitleText() {
+        logger.info("Project Summary sayfasındaki proje başlığı okunuyor");
+        String title = getText(projectTitle).trim();
+        logger.info("Okunan proje başlığı: {}", title);
+        return title;
+    }
+
+    /**
+     * Dashboard sayfasına gider.
+     */
+    public DashboardPage goToDashboardPage() {
+        logger.info("Dashboard sayfasına gidiliyor");
+        click(dashboardLink);
+        return new DashboardPage(driver);
     }
 }
