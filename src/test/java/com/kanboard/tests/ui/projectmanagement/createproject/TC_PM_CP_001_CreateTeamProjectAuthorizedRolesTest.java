@@ -1,4 +1,4 @@
-package com.kanboard.tests.projectmanagement.createproject;
+package com.kanboard.tests.ui.projectmanagement.createproject;
 
 import com.kanboard.models.TestUser;
 import com.kanboard.models.TestUsers;
@@ -12,7 +12,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 // TC-PM-CP-001 için authorized role matrix testi
-public class CreateTeamProjectAuthorizedRolesTest extends BaseUiTest {
+public class TC_PM_CP_001_CreateTeamProjectAuthorizedRolesTest extends BaseUiTest {
 
     // Yetkili roller
     @DataProvider(name = "authorizedTeamProjectRoleData")

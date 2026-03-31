@@ -2,6 +2,7 @@ package com.kanboard.base;
 
 import java.time.Duration;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -81,11 +82,26 @@ public abstract class BasePage {
     }
 
     /**
+     * Element attribute değerini döner.
+     */
+    protected String getAttribute(By locator, String attributeName) {
+        return waitForPresence(locator).getAttribute(attributeName);
+    }
+
+    /**
      * Element görünürse true döner.
      */
     protected boolean isVisible(By locator) {
         try {
             return waitForVisibility(locator).isDisplayed();
+        } catch (StaleElementReferenceException exception) {
+            logger.debug("Element stale oldu, tekrar kontrol ediliyor: {}", locator);
+            try {
+                return waitForVisibility(locator).isDisplayed();
+            } catch (TimeoutException | StaleElementReferenceException retryException) {
+                logger.debug("Element görünür değil: {}", locator);
+                return false;
+            }
         } catch (TimeoutException exception) {
             logger.debug("Element görünür değil: {}", locator);
             return false;

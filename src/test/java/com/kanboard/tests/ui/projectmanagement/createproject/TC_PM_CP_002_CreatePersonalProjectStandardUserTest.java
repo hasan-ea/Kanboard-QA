@@ -1,4 +1,4 @@
-package com.kanboard.tests.projectmanagement.createproject;
+package com.kanboard.tests.ui.projectmanagement.createproject;
 
 import com.kanboard.models.TestUser;
 import com.kanboard.models.TestUsers;
@@ -11,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 // TC-PM-CP-002 için standard user personal project create testi
-public class CreatePersonalProjectStandardUserTest extends BaseUiTest {
+public class TC_PM_CP_002_CreatePersonalProjectStandardUserTest extends BaseUiTest {
 
     @Test(
             description = "TC-PM-CP-002 | PM-CP-002 | Authenticated standard user personal project başarıyla oluşturabilmeli"

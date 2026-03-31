@@ -1,18 +1,17 @@
-package com.kanboard.tests.projectmanagement.createproject;
+package com.kanboard.tests.ui.projectmanagement.createproject;
 
 import com.kanboard.models.TestUser;
 import com.kanboard.models.TestUsers;
 import com.kanboard.pages.DashboardPage;
 import com.kanboard.pages.NewProjectModal;
 import com.kanboard.pages.ProjectSummaryPage;
-import com.kanboard.pages.ProjectsPage;
 import com.kanboard.tests.base.BaseUiTest;
 import com.kanboard.utils.RandomDataUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 // TC-PM-CP-003 için create sonrası redirect ve visibility testi
-public class CreateTeamProjectVisibilityAfterSuccessTest extends BaseUiTest {
+public class TC_PM_CP_003_CreateTeamProjectVisibilityAfterSuccessTest extends BaseUiTest {
 
     @Test(
             description = "TC-PM-CP-003 | PM-CP-003 | Başarılı create sonrası kullanıcı doğru sonuca yönlendirilmeli ve kayıt görünür olmalı"

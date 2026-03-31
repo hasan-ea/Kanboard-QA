@@ -1,11 +1,11 @@
-package api.model;
+package com.kanboard.api.model;
 
 public class JsonRpcRequest<T> {
 
-    private String jsonrpc = "2.0";
-    private String method;
-    private int id;
-    private T params;
+    private final String jsonrpc = "2.0";
+    private final String method;
+    private final int id;
+    private final T params;
 
     public JsonRpcRequest(String method, int id, T params) {
         this.method = method;

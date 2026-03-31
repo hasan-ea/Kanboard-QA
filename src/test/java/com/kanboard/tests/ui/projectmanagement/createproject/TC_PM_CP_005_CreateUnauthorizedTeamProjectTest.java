@@ -1,17 +1,16 @@
-package com.kanboard.tests.projectmanagement.createproject;
+package com.kanboard.tests.ui.projectmanagement.createproject;
 
 import com.kanboard.models.TestUser;
 import com.kanboard.models.TestUsers;
 import com.kanboard.pages.DashboardPage;
 import com.kanboard.pages.NewProjectModal;
-import com.kanboard.pages.ProjectsPage;
 import com.kanboard.tests.base.BaseUiTest;
 import com.kanboard.utils.RandomDataUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 // TC-PM-CP-005 için yetkisiz user team project create engelleme testi
-public class CreateUnauthorizedTeamProjectTest extends BaseUiTest {
+public class TC_PM_CP_005_CreateUnauthorizedTeamProjectTest extends BaseUiTest {
 
     @Test(
             description = "TC-PM-CP-005 | PM-CP-005 | Unauthorized user UI üzerinden team project oluşturamamalı"

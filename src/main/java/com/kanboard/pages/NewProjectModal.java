@@ -2,6 +2,7 @@ package com.kanboard.pages;
 
 import com.kanboard.base.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -49,6 +50,20 @@ public class NewProjectModal extends BasePage {
     public void clickSave() {
         logger.info("Proje kaydetme işlemi başlatılıyor");
         click(saveButton);
+    }
+
+    /**
+     * Browser'ın project name alanı için ürettiği validation mesajını döner.
+     */
+    public String getProjectNameValidationMessage() {
+        logger.info("Project name alanı için validation message okunuyor");
+
+        try {
+            return getAttribute(projectNameInput, "validationMessage");
+        } catch (StaleElementReferenceException exception) {
+            logger.warn("Project name elementi stale oldu, tekrar okunuyor");
+            return getAttribute(projectNameInput, "validationMessage");
+        }
     }
 
     /**

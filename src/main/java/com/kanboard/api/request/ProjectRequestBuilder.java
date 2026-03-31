@@ -1,6 +1,7 @@
-package api.request;
+package com.kanboard.api.request;
 
-import api.model.JsonRpcRequest;
+import com.kanboard.api.model.JsonRpcRequest;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package com.kanboard.tests.projectmanagement.createproject;
+package com.kanboard.tests.ui.projectmanagement.createproject;
 
 import com.kanboard.models.TestUser;
 import com.kanboard.models.TestUsers;
@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 // TC-PM-CP-004 için rol bazlı create option visibility testi
-public class CreateProjectVisibilityTest extends BaseUiTest {
+public class TC_PM_CP_004_CreateProjectVisibilityTest extends BaseUiTest {
 
     @DataProvider(name = "createProjectVisibilityMatrix")
     public Object[][] createProjectVisibilityMatrix() {

@@ -13,6 +13,7 @@ public class ProjectSummaryPage extends BasePage {
     private final By projectTitle = By.cssSelector("span.title");
     private final By summarySectionTitle = By.cssSelector("section h2");
     private final By dashboardLink = By.cssSelector("a[href=\"/dashboard\"]");
+    private final By editProjectLink = By.linkText("Edit project");
 
     public ProjectSummaryPage(WebDriver driver) {
         super(driver);
@@ -50,6 +51,15 @@ public class ProjectSummaryPage extends BasePage {
         String title = getText(projectTitle).trim();
         logger.info("Okunan proje başlığı: {}", title);
         return title;
+    }
+
+    /**
+     * Edit project ekranına gider.
+     */
+    public ProjectEditPage goToEditProjectPage() {
+        logger.info("Edit project ekranına gidiliyor");
+        click(editProjectLink);
+        return new ProjectEditPage(driver);
     }
 
     /**
