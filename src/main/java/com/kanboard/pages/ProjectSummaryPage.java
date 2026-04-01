@@ -48,9 +48,21 @@ public class ProjectSummaryPage extends BasePage {
      */
     public String getProjectTitleText() {
         logger.info("Project Summary sayfasındaki proje başlığı okunuyor");
-        String title = getText(projectTitle).trim();
-        logger.info("Okunan proje başlığı: {}", title);
-        return title;
+
+        if (driver.findElements(projectTitle).isEmpty()) {
+            logger.warn("Project title elementi bulunamadı, boş string döndürülüyor");
+            return "";
+        }
+
+        String titleText = driver.findElement(projectTitle).getText();
+
+        if (titleText == null) {
+            logger.warn("Project title null geldi, boş string döndürülüyor");
+            return "";
+        }
+
+        logger.info("Project Summary başlığı okundu: [{}]", titleText);
+        return titleText;
     }
 
     /**

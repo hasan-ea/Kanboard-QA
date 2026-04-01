@@ -1,6 +1,7 @@
 package com.kanboard.pages;
 
 import com.kanboard.base.BasePage;
+import com.kanboard.pages.sections.MyProjectsSection;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -170,9 +171,9 @@ public class DashboardPage extends BasePage {
     /**
      * Projeler sayfasını açar.
      */
-    public ProjectsPage goToProjectsPage() {
+    public MyProjectsSection goToMyProjectsSection() {
         logger.info("Projeler sayfası açılıyor");
         click(myProjectsLink);
-        return new ProjectsPage(driver);
+        return new MyProjectsSection(driver);
     }
 }

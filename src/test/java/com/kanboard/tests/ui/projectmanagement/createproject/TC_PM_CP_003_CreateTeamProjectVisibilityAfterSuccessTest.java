@@ -3,6 +3,7 @@ package com.kanboard.tests.ui.projectmanagement.createproject;
 import com.kanboard.models.TestUser;
 import com.kanboard.models.TestUsers;
 import com.kanboard.pages.DashboardPage;
+import com.kanboard.pages.sections.MyProjectsSection;
 import com.kanboard.pages.NewProjectModal;
 import com.kanboard.pages.ProjectSummaryPage;
 import com.kanboard.tests.base.BaseUiTest;
@@ -63,9 +64,9 @@ public class TC_PM_CP_003_CreateTeamProjectVisibilityAfterSuccessTest extends Ba
         );
 
         // Dashboard'dan projects sayfasına git
-        ProjectsPage projectsPage = returnedDashboardPage.goToProjectsPage();
+        MyProjectsSection projectsPage = returnedDashboardPage.goToMyProjectsSection();
         Assert.assertTrue(
-                projectsPage.isDisplayed(),
+                projectsPage.isSectionDisplayed(),
                 "Projects sayfası açılmadı."
         );
 

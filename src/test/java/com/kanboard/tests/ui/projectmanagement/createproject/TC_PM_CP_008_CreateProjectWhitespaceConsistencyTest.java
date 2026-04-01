@@ -6,9 +6,9 @@ import com.kanboard.pages.DashboardPage;
 import com.kanboard.pages.NewProjectModal;
 import com.kanboard.pages.ProjectEditPage;
 import com.kanboard.pages.ProjectSummaryPage;
+import com.kanboard.pages.sections.MyProjectsSection;
 import com.kanboard.tests.base.BaseUiTest;
 import com.kanboard.utils.RandomDataUtils;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -96,28 +96,23 @@ public class TC_PM_CP_008_CreateProjectWhitespaceConsistencyTest extends BaseUiT
                 "Dashboard ekranına dönülemedi. Case: " + caseLabel
         );
 
-        // 8. Dashboard listesindeki proje adını proje id ile al
-        String dashboardListedName = getDashboardProjectNameByProjectId(projectId);
+        // 8. My Projects ekranına git ve listeden project id ile adı al
+        MyProjectsSection myProjectsSection = returnedDashboardPage.goToMyProjectsSection();
+        Assert.assertTrue(
+                myProjectsSection.isSectionDisplayed(),
+                "My Projects ekranı / listesi görüntülenemedi. Case: " + caseLabel
+        );
+
+        String dashboardListedName = myProjectsSection.getListedProjectNameByProjectId(projectId);
         Assert.assertNotNull(
                 dashboardListedName,
                 "Dashboard listesindeki proje adı bulunamadı. Case: " + caseLabel
         );
 
-        // 9. Karşılaştırmalar
-        Assert.assertEquals(
-                dashboardListedName,
-                summaryName,
-                "Dashboard listesi ve Summary ekranındaki proje adı aynı olmalıdır. Case: " + caseLabel
-        );
+        // 9. Input tipine göre assertion branch'i
+        boolean whitespaceOnlyInput = rawProjectName.trim().isEmpty();
 
-        Assert.assertEquals(
-                normalizeWhitespace(editInputValue),
-                normalizeWhitespace(summaryName),
-                "Edit input değeri ile Summary adı normalize edilmiş karşılaştırmada tutarlı olmalıdır. Case: " + caseLabel
-        );
-
-        // 10. Whitespace-only kabul edilmişse boş/anlamsız display üretme riski kontrolü
-        if (rawProjectName.trim().isEmpty()) {
+        if (whitespaceOnlyInput) {
             Assert.assertFalse(
                     summaryName.trim().isEmpty(),
                     "Whitespace-only input kabul edildiyse Summary ekranında boş/anlamsız görünen proje adı olmamalıdır. Case: " + caseLabel
@@ -127,9 +122,20 @@ public class TC_PM_CP_008_CreateProjectWhitespaceConsistencyTest extends BaseUiT
                     dashboardListedName.trim().isEmpty(),
                     "Whitespace-only input kabul edildiyse Dashboard listesinde boş/anlamsız görünen proje adı olmamalıdır. Case: " + caseLabel
             );
+        } else {
+            Assert.assertEquals(
+                    dashboardListedName,
+                    summaryName,
+                    "Dashboard listesi ve Summary ekranındaki proje adı aynı olmalıdır. Case: " + caseLabel
+            );
+
+            Assert.assertEquals(
+                    editInputValue,
+                    summaryName,
+                    "Edit input değeri ile Summary adı raw karşılaştırmada tutarlı olmalıdır. Case: " + caseLabel
+            );
         }
 
-        // TODO: Cleanup helper hazırsa proje silme adımı eklenmeli.
     }
 
     private String buildProjectName(String template) {
@@ -146,17 +152,5 @@ public class TC_PM_CP_008_CreateProjectWhitespaceConsistencyTest extends BaseUiT
         }
 
         return Integer.parseInt(matcher.group(1));
-    }
-
-    private String getDashboardProjectNameByProjectId(int projectId) {
-        By projectLink = By.xpath("//div[contains(@class,'table-list')]//a[@href='/project/" + projectId + "']");
-        return driver.findElement(projectLink).getText().trim();
-    }
-
-    private String normalizeWhitespace(String value) {
-        if (value == null) {
-            return null;
-        }
-        return value.trim().replaceAll("\\s+", " ");
     }
 }

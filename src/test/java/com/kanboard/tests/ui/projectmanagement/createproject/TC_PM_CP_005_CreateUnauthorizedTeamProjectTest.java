@@ -3,6 +3,7 @@ package com.kanboard.tests.ui.projectmanagement.createproject;
 import com.kanboard.models.TestUser;
 import com.kanboard.models.TestUsers;
 import com.kanboard.pages.DashboardPage;
+import com.kanboard.pages.sections.MyProjectsSection;
 import com.kanboard.pages.NewProjectModal;
 import com.kanboard.tests.base.BaseUiTest;
 import com.kanboard.utils.RandomDataUtils;
@@ -48,10 +49,10 @@ public class TC_PM_CP_005_CreateUnauthorizedTeamProjectTest extends BaseUiTest {
 
         newProjectModal.createProject(projectName, projectIdentifier);
 
-        ProjectsPage projectsPage = dashboardPage.goToProjectsPage();
+        MyProjectsSection projectsPage = dashboardPage.goToMyProjectsSection();
 
         Assert.assertTrue(
-                projectsPage.isDisplayed(),
+                projectsPage.isSectionDisplayed(),
                 "Projects sayfası açılmadı."
         );
 
