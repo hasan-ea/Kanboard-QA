@@ -4,10 +4,7 @@ target/
 !src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-../.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -37,10 +34,10 @@ build/
 ### Mac OS ###
 .DS_Store
 
-
+### Local config ###
 src/test/resources/config/credentials.local.properties
 
-
+### Docs - ignored module folders ###
 docs/project-management/authorization-negative-cases/
 docs/project-management/default-settings/
 docs/project-management/edit-project/
@@ -48,3 +45,6 @@ docs/project-management/environment/
 docs/project-management/project-type-access-behavior/
 docs/project-management/project-views/
 docs/project-management/remove-project/
+
+### Keep tracked README ###
+!docs/project-management/README.md

@@ -1,46 +1,206 @@
-# Kanboard QA Automation Project
+# Kanboard-QA
 
-Bu repo, açık kaynaklı **Kanboard** uygulaması üzerinde yürüttüğüm uçtan uca bir QA çalışma projesini içermektedir.
+Kanboard uygulaması üzerinde modül bazlı ilerleyen, uçtan uca QA odaklı bir test mühendisliği projesidir.
 
-Projede amacım; bir uygulamayı yalnızca test etmek değil, süreci baştan sona bir QA bakış açısıyla ele almak. Bu kapsamda iş analizi, test senaryoları, test case dokümanları, manuel test yaklaşımı, UI otomasyon ve API test tasarımı adım adım oluşturulmaktadır.
+Bu proje yalnızca test otomasyonu üretmek için değil; iş analizi, test kapsamı belirleme, senaryo tasarımı, test case yazımı, manuel test yaklaşımı, UI otomasyon ve API doğrulama mantığını birlikte göstermek için hazırlanmıştır.
 
-## Proje Kapsamı
+---
 
-Bu çalışma kapsamında aşağıdaki alanlar üzerinde ilerlenmektedir:
+## Projenin Amacı
 
-- modül bazlı iş analizi
-- test senaryoları ve detaylı test case dokümantasyonu
-- core regression ve extended coverage ayrımı
+Bu çalışmanın amacı, Kanboard üzerinde gerçek bir QA süreci kurgulayarak aşağıdaki alanlarda izlenebilir bir yapı oluşturmaktır:
+
+- business analysis (BA) çalışması
+- modül bazlı test kapsamı oluşturma
+- test senaryoları ve test case dokümantasyonu
 - UI test otomasyonu
-- API test tasarımı
-- sürdürülebilir ve izlenebilir test yapısı kurulumu
+- API doğrulama yaklaşımı
+- traceability odaklı test tasarımı
+- sürdürülebilir ve geliştirilebilir bir automation framework
 
-## Kullanılan Teknolojiler
+Bu repo bir "tek seferlik script" çalışması değil; modül bazlı büyüyebilen, sade ama profesyonel bir QA portföy projesi olarak tasarlanmıştır.
 
-- Java
-- Selenium
-- TestNG
-- Maven
-- Page Object Model
-- JSON-RPC / API test yaklaşımı
-- Docker ile lokal Kanboard ortamı
+---
 
-## Mevcut Durum
+## Mevcut Kapsam
 
-Proje şu anda **geliştirme aşamasındadır**.
+### Tamamlanan Modül
+**Project Management > Create Project**
 
-Şu an ağırlıklı olarak aşağıdaki başlıklar üzerinde çalışılmaktadır:
+Bu modül için şu çalışmalar tamamlanmıştır:
 
-- analiz ve test dokümanlarının hazırlanması
-- test environment kurulumu
-- baseline test data yapısının oluşturulması
-- otomasyon framework temelinin kurulması
-- modül bazlı test kapsamının netleştirilmesi
+- BA analizi hazırlandı
+- test senaryoları üretildi
+- test case dokümanı oluşturuldu
+- UI ve API açısından otomasyona uygun kapsam netleştirildi
+- toplam **8 test case** otomasyona alındı
+    - **7 UI test**
+    - **1 API test**
 
-UI ve API otomasyon adımları, bu temel yapı üzerine kontrollü ve sürdürülebilir şekilde ilerletilmektedir.
+### Seçili Scope Yaklaşımı
+Başlangıçta proje daha geniş düşünülmüş olsa da, portföyde kaliteyi artırmak için kapsam kontrollü şekilde daraltılmıştır.
 
-## Amaç
+Bu repo finalde **2 modül** üzerinden ilerleyecektir:
 
-Bu projeyi, QA alanında hem manuel test hem de otomasyon tarafında düzenli, gerçekçi ve geliştirilebilir bir portfolyo çalışması ortaya koymak için hazırlıyorum.
+1. **Create Project**
+2. **Project Type / Access Behavior** *(planlanan ikinci modül)*
 
-Buradaki temel hedefim; sadece çalışan testler üretmek değil, aynı zamanda okunabilir, bakım kolaylığı olan ve test dokümanlarıyla ilişkisi net bir yapı kurmaktır.
+Bu tercih bilinçlidir. Amaç, çok fazla modülü yüzeysel göstermek yerine daha az modülü daha sağlam, izlenebilir ve profesyonel şekilde sunmaktır.
+
+---
+
+## Test Yaklaşımı
+
+Projede aşağıdaki yaklaşım benimsenmiştir:
+
+- modül bazlı ilerleme
+- requirement / business rule odaklı düşünme
+- scenario → test case → automation zinciri
+- core regression ve extended coverage ayrımı
+- UI ve API doğrulamalarını mantıklı şekilde ayırma
+- gerektiğinde hybrid doğrulama kullanma
+- authorization, validation, visibility ve data integrity risklerini dikkate alma
+
+---
+
+## Teknik Stack
+
+- **Java**
+- **Selenium**
+- **TestNG**
+- **Maven**
+- **Page Object Model (POM)**
+- **Rest Assured**
+- **JSON-RPC API test yaklaşımı**
+- **Docker / Docker Compose**
+- **Logback / SLF4J**
+
+---
+
+## Proje Yapısı
+
+```text
+Kanboard-QA/
+├─ docs/
+├─ scripts/
+├─ src/
+│  ├─ main/
+│  │  └─ java/com/kanboard/
+│  │     ├─ api/
+│  │     ├─ base/
+│  │     ├─ driver/
+│  │     ├─ models/
+│  │     ├─ pages/
+│  │     └─ utils/
+│  └─ test/
+│     ├─ java/com/kanboard/tests/
+│     │  ├─ base/
+│     │  ├─ ui/projectmanagement/createproject/
+│     │  └─ api/projectmanagement/createproject/
+│     └─ resources/
+│        ├─ config/
+│        ├─ suites/
+│        └─ testdata/
+├─ docker-compose.yml
+├─ pom.xml
+└─ README.md
+```
+
+---
+
+## Dokümantasyon Yapısı
+
+Create Project modülü için dokümantasyon 3 katmanda hazırlanmıştır:
+
+1. **BA / Test Analizi**
+2. **Test Scenarios**
+3. **Test Cases**
+
+Bu yapı sayesinde aşağıdaki izlenebilirlik hedeflenmiştir:
+
+- iş kuralı → senaryo
+- senaryo → test case
+- test case → otomasyon
+
+---
+
+## Otomasyon Kapsamı
+
+Şu an otomasyona alınan alanlar ağırlıklı olarak şu riskleri hedeflemektedir:
+
+- authorized create behavior
+- unauthorized create attempt
+- validation davranışı
+- create sonrası visibility
+- UI ve API consistency kontrolü
+
+Bu yaklaşım sayesinde otomasyon yalnızca happy path ile sınırlı kalmamıştır.
+
+---
+
+## Ortam Kurulumu
+
+Projede test ortamı Docker Compose ile ayağa kaldırılmaktadır.
+
+Genel akış:
+
+1. Kanboard ve veritabanı container’larını başlat
+2. test konfigürasyon dosyalarını hazırla
+3. ilgili suite üzerinden testleri çalıştır
+
+> Not: Bu repo portföy odaklı bir QA çalışmasıdır. Ortam ve veri yönetimi zaman içinde CI/CD uyumlu hale getirilecek şekilde geliştirilmektedir.
+
+---
+
+## Hedeflenen Sonraki Adımlar
+
+- ikinci modülün BA, scenario ve case dokümanlarını hazırlamak
+- ikinci modülün UI/API otomasyon kapsamını oluşturmak
+- test suite yapısını modül bazlı netleştirmek
+- Jenkins ile CI sürecine bağlamak
+- raporlama ve execution görünürlüğünü iyileştirmek
+- framework yapısını daha CI-friendly hale getirmek
+
+---
+
+## CI/CD Hedefi
+
+Bu proje için hedeflenen CI yaklaşımı:
+
+- Jenkins ile otomatik test tetikleme
+- modül bazlı suite koşumu
+- build + test sonucu görünürlüğü
+- ileride smoke / regression ayrımı ile pipeline kurgusu
+
+Şu an öncelik, modül bazlı test tasarımını ve framework temelini doğru oturtmaktır.
+
+---
+
+## Bu Projeyi Nasıl Konumluyorum?
+
+Bu repo, çok sayıda test yazılmış bir demo proje olmaktan çok, şu konuları göstermek için hazırlanmıştır:
+
+- kapsam yönetimi
+- QA analitik düşünce yapısı
+- test tasarım kalitesi
+- otomasyona uygun dokümantasyon
+- traceability
+- sürdürülebilir framework yaklaşımı
+
+Amaç, az modülle daha güçlü ve daha profesyonel bir kalite algısı oluşturmaktır.
+
+---
+
+## AI Kullanım Notu
+
+Bu proje tamamen gözü kapalı şekilde üretilmiş bir çalışma değildir.
+
+Analiz, kapsam yönetimi, modül seçimi, test yaklaşımı ve otomasyon yönü tarafımdan yönetilmiştir. Süreç içinde araştırma, alternatif çözüm üretimi, teknik doğrulama ve bazı geliştirme detaylarında AI destekli araçlardan yararlanılmıştır.
+
+Bu nedenle proje, yalnızca kod üretimine değil; karar verme, yapı kurma ve QA mantığını yönetme becerisine odaklı olarak değerlendirilmelidir.
+
+---
+
+## İletişim
+
+GitHub profilim üzerinden benimle iletişime geçebilirsiniz.
