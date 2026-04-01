@@ -39,3 +39,12 @@ build/
 
 
 src/test/resources/config/credentials.local.properties
+
+
+docs/project-management/authorization-negative-cases/
+docs/project-management/default-settings/
+docs/project-management/edit-project/
+docs/project-management/environment/
+docs/project-management/project-type-access-behavior/
+docs/project-management/project-views/
+docs/project-management/remove-project/

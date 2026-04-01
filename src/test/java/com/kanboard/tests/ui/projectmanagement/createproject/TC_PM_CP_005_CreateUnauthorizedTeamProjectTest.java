@@ -49,15 +49,15 @@ public class TC_PM_CP_005_CreateUnauthorizedTeamProjectTest extends BaseUiTest {
 
         newProjectModal.createProject(projectName, projectIdentifier);
 
-        MyProjectsSection projectsPage = dashboardPage.goToMyProjectsSection();
+        MyProjectsSection myProjectsSection = dashboardPage.goToMyProjectsSection();
 
         Assert.assertTrue(
-                projectsPage.isSectionDisplayed(),
-                "Projects sayfası açılmadı."
+                myProjectsSection.isSectionDisplayed(),
+                "My Projects section açılmadı."
         );
 
         Assert.assertFalse(
-                projectsPage.isProjectListed(projectName),
+                myProjectsSection.isProjectListed(projectName),
                 "Yetkisiz kullanıcı için team project kaydı oluşmamalıydı: " + projectName
         );
     }

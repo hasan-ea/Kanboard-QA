@@ -5,20 +5,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
- * My projects sayfasındaki proje listesini yönetir.
+ * Dashboard > My projects bölümündeki proje listesini yönetir.
  */
 public class MyProjectsSection extends BasePage {
 
     private final By myProjectsSectionTitle =
-            By.xpath("//div[contains(@class,'sidebar-content')]//*[normalize-space()='My projects']");
-    private final By projectList = By.cssSelector("div.sidebar-content div.table-list");
+            By.xpath("//h2[contains(normalize-space(),'My projects')]");
+    private final By projectList =
+            By.xpath("//h2[contains(normalize-space(),'My projects')]/following::div[contains(@class,'table-list')][1]");
 
     public MyProjectsSection(WebDriver driver) {
         super(driver);
     }
 
     /**
-     * Sayfanın görüntülendiğini kontrol eder.
+     * My Projects bölümünün görüntülendiğini kontrol eder.
      */
     public boolean isSectionDisplayed() {
         logger.info("My Projects section görünürlüğü doğrulanıyor");
@@ -31,26 +32,34 @@ public class MyProjectsSection extends BasePage {
      * Verilen projenin listede yer aldığını kontrol eder.
      */
     public boolean isProjectListed(String projectName) {
-        logger.info("Projects listesinde projenin bulunduğu doğrulanıyor: {}", projectName);
+        logger.info("My Projects listesinde proje aranıyor: {}", projectName);
 
         if (!isVisible(projectList)) {
-            logger.info("Projects listesi görünür değil, proje doğrulaması yapılamadı");
+            logger.info("My Projects listesi görünür değil");
             return false;
         }
 
         By projectLink = By.xpath(
-                "//div[contains(@class,'sidebar-content')]//div[contains(@class,'table-list')]//span[contains(@class,'table-list-title')]//a[normalize-space()='" + projectName + "']"
+                "//h2[contains(normalize-space(),'My projects')]/following::div[contains(@class,'table-list')][1]" +
+                        "//span[contains(@class,'table-list-title')]//a[normalize-space()='" + projectName + "']"
         );
 
         boolean listed = isVisible(projectLink);
-        logger.info("Projects listesinde proje bulunma sonucu [{}]: {}", projectName, listed);
+        logger.info("My Projects listesinde proje bulunma sonucu [{}]: {}", projectName, listed);
         return listed;
     }
 
+    /**
+     * Verilen project id için listede görünen proje adını döner.
+     */
     public String getListedProjectNameByProjectId(int projectId) {
-        logger.info("My projects listesinde project id ile proje adı okunuyor: {}", projectId);
+        logger.info("My Projects listesinde project id ile proje adı okunuyor: {}", projectId);
 
-        By projectLink = By.xpath("//a[@href='/project/" + projectId + "']");
+        By projectLink = By.xpath(
+                "//h2[contains(normalize-space(),'My projects')]/following::div[contains(@class,'table-list')][1]" +
+                        "//div[contains(@class,'table-list-row') and contains(normalize-space(.), '#" + projectId + "')]" +
+                        "//span[contains(@class,'table-list-title')]//a"
+        );
 
         if (driver.findElements(projectLink).isEmpty()) {
             logger.warn("Project id ile proje linki bulunamadı: {}", projectId);
@@ -58,7 +67,7 @@ public class MyProjectsSection extends BasePage {
         }
 
         String projectName = driver.findElement(projectLink).getText();
-        logger.info("My projects listesinde okunan proje adı: [{}]", projectName);
+        logger.info("My Projects listesinde okunan proje adı: [{}]", projectName);
         return projectName;
     }
 }

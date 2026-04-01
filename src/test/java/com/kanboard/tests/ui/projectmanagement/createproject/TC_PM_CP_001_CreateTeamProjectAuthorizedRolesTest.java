@@ -11,10 +11,10 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-// TC-PM-CP-001 için authorized role matrix testi
+// TC-PM-CP-001 | Yetkili roller team project oluşturabilmeli
 public class TC_PM_CP_001_CreateTeamProjectAuthorizedRolesTest extends BaseUiTest {
 
-    // Yetkili roller
+    // Team project oluşturabilen roller
     @DataProvider(name = "authorizedTeamProjectRoleData")
     public Object[][] authorizedTeamProjectRoleData() {
         return new Object[][]{
@@ -48,15 +48,16 @@ public class TC_PM_CP_001_CreateTeamProjectAuthorizedRolesTest extends BaseUiTes
                 "New project modalı açılmadı."
         );
 
-        // Project oluştur
+        // Proje oluştur
         ProjectSummaryPage projectSummaryPage = newProjectModal.createProject(projectName);
 
-        // Sonuç doğrulama
+        // Summary ekranı açıldı mı kontrol et
         Assert.assertTrue(
                 projectSummaryPage.isProjectSummaryPageDisplayed(),
                 "Project summary ekranı açılmadı."
         );
 
+        // Oluşturulan proje adı summary ekranında görünmeli
         Assert.assertTrue(
                 projectSummaryPage.isProjectNameDisplayed(projectName),
                 "Oluşturulan proje adı ekranda görünmüyor."

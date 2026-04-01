@@ -10,7 +10,7 @@ import com.kanboard.utils.RandomDataUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-// TC-PM-CP-002 için standard user personal project create testi
+// TC-PM-CP-002 | Standard user personal project oluşturabilmeli
 public class TC_PM_CP_002_CreatePersonalProjectStandardUserTest extends BaseUiTest {
 
     @Test(
@@ -37,15 +37,16 @@ public class TC_PM_CP_002_CreatePersonalProjectStandardUserTest extends BaseUiTe
                 "New personal project modalı açılmadı."
         );
 
-        // Project oluştur
+        // Personal project oluştur
         ProjectSummaryPage projectSummaryPage = newPersonalProjectModal.createPersonalProject(projectName);
 
-        // Sonuç doğrulama
+        // Summary ekranı açıldı mı kontrol et
         Assert.assertTrue(
                 projectSummaryPage.isProjectSummaryPageDisplayed(),
                 "Project summary ekranı açılmadı."
         );
 
+        // Oluşturulan personal project adı ekranda görünmeli
         Assert.assertTrue(
                 projectSummaryPage.isProjectNameDisplayed(projectName),
                 "Oluşturulan personal project adı ekranda görünmüyor."

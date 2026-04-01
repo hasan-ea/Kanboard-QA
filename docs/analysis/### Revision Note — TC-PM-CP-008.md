@@ -13,46 +13,57 @@ Revize edilmiş Case
 ## TC-PM-CP-008
 - **Test Case ID:** TC-PM-CP-008
 - **Related Scenario ID:** PM-CP-008
-- **Test Case Title:** Whitespace içeren project name girdilerinde create sonrası display ve edit davranışı tutarlı olmalı
-- **Purpose:** Whitespace-only ve trim-sensitive project name girdilerinde sistemin create, list display ve edit ekranı davranışını tutarlılık açısından doğrulamak.
+- **Test Case Title:** Whitespace içeren project name girdilerinde create sonrası davranış kontrollü ve tutarlı olmalı
+- **Purpose:** Whitespace-only ve trim-sensitive project name girdilerinde sistemin create sonrası gösterim ve edit davranışını doğrulamak; davranışın kontrollü, tutarlı ve kullanıcı açısından anlaşılabilir olup olmadığını değerlendirmek.
 - **Priority:** High
 - **Coverage Type:** Extended Coverage
 - **Layer:** UI
-- **Preconditions:**
-    - Team project create yetkisine sahip bir kullanıcı hazır olmalı.
-    - Create ekranı erişilebilir olmalı.
-    - Proje listesi ve proje ayarları ekranı erişilebilir olmalı.
-- **Test Data:**
-    - `" "`
-    - `"     "`
-    - `" Project Alpha"`
-    - `"Project Alpha "`
-    - `"Project   Alpha"`
-    - `"  Project   Alpha  "`
-- **Steps:**
-    1. Create ekranını aç.
-    2. Veri setindeki project name değerlerinden birini gir.
-    3. Project create işlemini tamamla.
-    4. Oluşturulan projenin listede görünen adını kaydet.
-    5. Proje detay/header alanında görünen adı kaydet.
-    6. Project settings > Edit project ekranını aç.
-    7. Edit input içindeki mevcut project name değerini kaydet.
-    8. Üç görünümü karşılaştır.
-    9. Aynı akışı diğer veri setleri için tekrarla.
-- **Expected Results:**
-    - Sistem whitespace içeren girdileri kabul edebilir veya normalize edebilir.
-    - Ancak proje adı farklı ekranlarda açıklanamayan çelişkili biçimde gösterilmemelidir.
-    - Liste görünümü, proje başlığı/detay görünümü ve edit input değeri deterministik davranmalıdır.
-    - Eğer normalization uygulanıyorsa bu davranış aynı veri seti için tutarlı olmalıdır.
-    - Whitespace-only input kabul ediliyorsa sistem kullanıcı açısından boş veya anlamsız görünen bir display üretmemelidir.
-    - Beklenmeyen server error, broken UI veya bozuk kayıt oluşmamalıdır.
-- **Postconditions / Cleanup:**
-    - Oluşturulan disposable projeler silinmelidir.
-- **Dependency:**
-    - Project create helper
-    - Project listing helper
-    - Project settings / edit helper
-- **Automation Candidate Note:**
-    - UI observation-driven coverage için uygundur.
-    - Blocking core regression yerine extended suite altında tutulmalıdır.
-    - Assertion’lar “kesin reject” yerine “cross-screen consistency” odaklı olmalıdır.
+
+### Preconditions
+- Team project create yetkisine sahip bir kullanıcı hazır olmalı.
+- Create ekranı erişilebilir olmalı.
+- Proje listesi ve project edit ekranı erişilebilir olmalı.
+
+### Test Data
+- `" "`
+- `"     "`
+- `" Project Alpha"`
+- `"Project Alpha "`
+- `"Project   Alpha"`
+- `"  Project   Alpha  "`
+
+### Steps
+1. Create ekranını aç.
+2. Veri setindeki project name değerlerinden birini gir.
+3. Project create işlemini submit et.
+4. Submit sonrası sistem davranışını gözlemle.
+5. Eğer create işlemi engellenirse:
+  - validation veya eşdeğer kullanıcı geri bildirimini kontrol et.
+  - başarılı create sonucuna ait ekran geçişi oluşmadığını doğrula.
+6. Eğer create işlemi kabul edilirse:
+  - Summary / detail görünümündeki proje adını kaydet.
+  - Proje listesinde görünen adı kaydet.
+  - Edit ekranındaki input değerini kaydet.
+7. Aynı veri seti için ekranlar arası davranışı karşılaştır.
+8. Akışı diğer veri setleri için tekrarla.
+
+### Expected Results
+- Sistem whitespace içeren girdileri tanımlı bir kurala göre ele almalıdır.
+- Sistem bu girdileri reddedebilir, kabul edebilir veya normalize edebilir.
+- Ancak aynı tip girdi için oluşan davranış tutarlı olmalıdır.
+- Create engelleniyorsa kullanıcı anlamlı bir geri bildirim almalı ve başarılı create akışı oluşmamalıdır.
+- Create kabul ediliyorsa proje adı farklı ekranlarda kullanıcıyı yanıltacak, açıklanamayan veya çelişkili biçimde gösterilmemelidir.
+- Proje adı kullanıcı açısından boş, anlamsız veya ayırt edilemez bir sonuca dönüşmemelidir.
+- Beklenmeyen server error, broken UI veya bozuk kayıt oluşmamalıdır.
+
+### Postconditions / Cleanup
+- Test verileri mevcut environment reset stratejisine göre temizlenmelidir.
+
+### Dependency
+- Project create helper
+- Project listing helper
+- Project edit helper
+
+### Automation Candidate Note
+- Bu test, whitespace handling davranışını ve ekranlar arası tutarlılığı gözlemlemek için uygundur.
+- Assertion’lar ürünün olası reject / accept / normalize davranışlarını peşinen varsaymamalı; yalnızca tutarsız, yanıltıcı veya anlamsız sonuçları fail etmelidir.

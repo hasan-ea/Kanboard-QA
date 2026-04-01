@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 /**
  * TC-PM-CP-008
- * Whitespace içeren project name girdilerinde create sonrası display ve edit davranışı tutarlı olmalı
+ * Whitespace içeren project name girdilerinde create sonrası davranış kontrollü ve tutarlı olmalı
  */
 public class TC_PM_CP_008_CreateProjectWhitespaceConsistencyTest extends BaseUiTest {
 
@@ -36,80 +36,70 @@ public class TC_PM_CP_008_CreateProjectWhitespaceConsistencyTest extends BaseUiT
 
     @Test(
             dataProvider = "whitespaceProjectNameData",
-            description = "TC-PM-CP-008 | Whitespace içeren project name girdilerinde create sonrası display ve edit davranışı tutarlı olmalı"
+            description = "TC-PM-CP-008 | Whitespace içeren project name girdilerinde create sonrası davranış kontrollü ve tutarlı olmalı"
     )
-    public void tcPmCp008_shouldShowConsistentProjectNameAcrossSummaryEditAndDashboard(String projectNameTemplate,
-                                                                                       String caseLabel) {
+    public void tcPmCp008_shouldHandleWhitespaceInputInControlledAndConsistentWay(String projectNameTemplate,
+                                                                                  String caseLabel) {
 
         TestUser user = TestUsers.admin();
         String rawProjectName = buildProjectName(projectNameTemplate);
 
-        // 1. Login
         DashboardPage dashboardPage = loginAs(user);
         Assert.assertTrue(
                 dashboardPage.isDashboardDisplayed(),
                 "Dashboard ekranı açılmadı. Case: " + caseLabel
         );
 
-        // 2. Create modalını aç
         NewProjectModal newProjectModal = dashboardPage.goToNewProjectModal();
         Assert.assertTrue(
                 newProjectModal.isDisplayed(),
                 "New Project modalı açılmadı. Case: " + caseLabel
         );
 
-        // 3. Projeyi oluştur
         ProjectSummaryPage projectSummaryPage = newProjectModal.createProject(rawProjectName);
         Assert.assertTrue(
                 projectSummaryPage.isProjectSummaryPageDisplayed(),
                 "Project Summary ekranı açılmadı. Case: " + caseLabel
         );
 
-        // 4. Summary ekranındaki görünen proje adını al
         String summaryName = projectSummaryPage.getProjectTitleText();
         Assert.assertNotNull(
                 summaryName,
                 "Summary ekranındaki proje adı null olmamalıdır. Case: " + caseLabel
         );
 
-        String currentUrl = driver.getCurrentUrl();
-        int projectId = extractProjectIdFromUrl(currentUrl);
+        int projectId = extractProjectIdFromUrl(driver.getCurrentUrl());
 
-        // 5. Edit project ekranına git
         ProjectEditPage projectEditPage = projectSummaryPage.goToEditProjectPage();
         Assert.assertTrue(
                 projectEditPage.isProjectEditPageDisplayed(),
                 "Edit project ekranı açılmadı. Case: " + caseLabel
         );
 
-        // 6. Edit input değerini al
         String editInputValue = projectEditPage.getProjectNameInputValue();
         Assert.assertNotNull(
                 editInputValue,
                 "Edit project Name input değeri null olmamalıdır. Case: " + caseLabel
         );
 
-        // 7. Dashboard'a dön
         DashboardPage returnedDashboardPage = projectEditPage.goToDashboardPage();
         Assert.assertTrue(
                 returnedDashboardPage.isDashboardDisplayed(),
                 "Dashboard ekranına dönülemedi. Case: " + caseLabel
         );
 
-        // 8. My Projects ekranına git ve listeden project id ile adı al
         MyProjectsSection myProjectsSection = returnedDashboardPage.goToMyProjectsSection();
         Assert.assertTrue(
                 myProjectsSection.isSectionDisplayed(),
                 "My Projects ekranı / listesi görüntülenemedi. Case: " + caseLabel
         );
 
-        String dashboardListedName = myProjectsSection.getListedProjectNameByProjectId(projectId);
+        String listedProjectName = myProjectsSection.getListedProjectNameByProjectId(projectId);
         Assert.assertNotNull(
-                dashboardListedName,
-                "Dashboard listesindeki proje adı bulunamadı. Case: " + caseLabel
+                listedProjectName,
+                "My Projects listesindeki proje adı null olmamalıdır. Case: " + caseLabel
         );
 
-        // 9. Input tipine göre assertion branch'i
         boolean whitespaceOnlyInput = rawProjectName.trim().isEmpty();
 
         if (whitespaceOnlyInput) {
@@ -119,23 +109,31 @@ public class TC_PM_CP_008_CreateProjectWhitespaceConsistencyTest extends BaseUiT
             );
 
             Assert.assertFalse(
-                    dashboardListedName.trim().isEmpty(),
-                    "Whitespace-only input kabul edildiyse Dashboard listesinde boş/anlamsız görünen proje adı olmamalıdır. Case: " + caseLabel
+                    listedProjectName.trim().isEmpty(),
+                    "Whitespace-only input kabul edildiyse My Projects listesinde boş/anlamsız görünen proje adı olmamalıdır. Case: " + caseLabel
             );
         } else {
-            Assert.assertEquals(
-                    dashboardListedName,
-                    summaryName,
-                    "Dashboard listesi ve Summary ekranındaki proje adı aynı olmalıdır. Case: " + caseLabel
+            Assert.assertFalse(
+                    summaryName.trim().isEmpty(),
+                    "Create kabul edilmişse Summary ekranındaki proje adı boş olmamalıdır. Case: " + caseLabel
+            );
+
+            Assert.assertFalse(
+                    listedProjectName.trim().isEmpty(),
+                    "Create kabul edilmişse My Projects listesindeki proje adı boş olmamalıdır. Case: " + caseLabel
             );
 
             Assert.assertEquals(
-                    editInputValue,
+                    listedProjectName,
                     summaryName,
-                    "Edit input değeri ile Summary adı raw karşılaştırmada tutarlı olmalıdır. Case: " + caseLabel
+                    "My Projects listesi ve Summary ekranındaki proje adı aynı olmalıdır. Case: " + caseLabel
+            );
+
+            Assert.assertFalse(
+                    editInputValue.trim().isEmpty(),
+                    "Create kabul edilmişse Edit input değeri boş olmamalıdır. Case: " + caseLabel
             );
         }
-
     }
 
     private String buildProjectName(String template) {
