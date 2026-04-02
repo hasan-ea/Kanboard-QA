@@ -15,8 +15,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - qa-net
 
   db:
     image: mariadb:lts
@@ -34,14 +32,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - qa-net
 
 volumes:
   kanboard_data:
   kanboard_plugins:
   kanboard_db:
-
-networks:
-  qa-net:
-    external: true

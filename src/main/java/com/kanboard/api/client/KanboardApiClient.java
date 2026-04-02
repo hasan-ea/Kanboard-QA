@@ -6,8 +6,11 @@ import io.restassured.response.Response;
 
 public class KanboardApiClient {
 
-    private final String jsonRpcUrl =
-            ConfigReader.getProperty("base.url") + "/jsonrpc.php";
+    private final String jsonRpcUrl;
+
+    public KanboardApiClient() {
+        this.jsonRpcUrl = ConfigReader.getProperty("base.url") + "/jsonrpc.php";
+    }
 
     public Response post(Object body, String username, String password) {
         return RestAssured

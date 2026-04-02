@@ -10,6 +10,14 @@ if [[ ! -f "$BACKUP_FILE" ]]; then
   exit 1
 fi
 
+echo "Recreating kanboard database..."
+
+docker compose -f "$COMPOSE_FILE" exec -T db \
+  sh -lc 'mariadb -uroot -p"$MYSQL_ROOT_PASSWORD" -e "
+    DROP DATABASE IF EXISTS kanboard;
+    CREATE DATABASE kanboard CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+  "'
+
 echo "Restoring baseline database from: $BACKUP_FILE"
 
 docker compose -f "$COMPOSE_FILE" exec -T db \

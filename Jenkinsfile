@@ -13,7 +13,7 @@ pipeline {
 
     environment {
         COMPOSE_FILE = 'docker-compose.yml'
-        BASE_URL = 'http://app'
+        BASE_URL = 'http://localhost:8080'
     }
 
     stages {
@@ -27,7 +27,6 @@ pipeline {
             steps {
                 sh 'chmod +x mvnw || true'
                 sh 'chmod +x scripts/*.sh || true'
-                sh 'docker network inspect qa-net >/dev/null 2>&1 || docker network create qa-net'
             }
         }
 
@@ -72,6 +71,12 @@ pipeline {
                     echo "App did not become ready in time."
                     exit 1
                 '''
+            }
+        }
+
+        stage('Verify Environment') {
+            steps {
+                sh './scripts/verify-baseline.sh'
             }
         }
 

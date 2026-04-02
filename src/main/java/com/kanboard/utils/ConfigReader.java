@@ -13,17 +13,17 @@ public final class ConfigReader {
     private static final Properties credentialProperties = new Properties();
 
     static {
-        loadProperties(TEST_CONFIG_PATH, testConfigProperties);
-        loadProperties(CREDENTIALS_PATH, credentialProperties);
+        loadRequiredProperties(TEST_CONFIG_PATH, testConfigProperties);
+        loadOptionalProperties(CREDENTIALS_PATH, credentialProperties);
     }
 
     private ConfigReader() {
     }
 
-    private static void loadProperties(String path, Properties properties) {
+    private static void loadRequiredProperties(String path, Properties properties) {
         try (InputStream inputStream = ConfigReader.class.getClassLoader().getResourceAsStream(path)) {
             if (inputStream == null) {
-                throw new RuntimeException("Properties file not found: " + path);
+                throw new RuntimeException("Required properties file not found: " + path);
             }
             properties.load(inputStream);
         } catch (IOException e) {
@@ -31,11 +31,57 @@ public final class ConfigReader {
         }
     }
 
+    private static void loadOptionalProperties(String path, Properties properties) {
+        try (InputStream inputStream = ConfigReader.class.getClassLoader().getResourceAsStream(path)) {
+            if (inputStream == null) {
+                return;
+            }
+            properties.load(inputStream);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load optional properties file: " + path, e);
+        }
+    }
+
     public static String getProperty(String key) {
-        return testConfigProperties.getProperty(key);
+        String value = resolveValue(key, testConfigProperties);
+        if (isBlank(value)) {
+            throw new RuntimeException("Missing config value for key: " + key);
+        }
+        return value;
     }
 
     public static String getCredential(String key) {
-        return credentialProperties.getProperty(key);
+        String value = resolveValue(key, credentialProperties);
+        if (isBlank(value)) {
+            throw new RuntimeException("Missing credential value for key: " + key);
+        }
+        return value;
+    }
+
+    private static String resolveValue(String key, Properties fileProperties) {
+        String systemValue = System.getProperty(key);
+        if (!isBlank(systemValue)) {
+            return systemValue;
+        }
+
+        String envValue = System.getenv(toEnvKey(key));
+        if (!isBlank(envValue)) {
+            return envValue;
+        }
+
+        String fileValue = fileProperties.getProperty(key);
+        if (!isBlank(fileValue)) {
+            return fileValue;
+        }
+
+        return null;
+    }
+
+    private static String toEnvKey(String key) {
+        return key.toUpperCase().replace('.', '_');
+    }
+
+    private static boolean isBlank(String value) {
+        return value == null || value.isBlank();
     }
 }
