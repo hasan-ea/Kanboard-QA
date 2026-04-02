@@ -13,7 +13,7 @@ fi
 echo "Recreating kanboard database..."
 
 docker compose -f "$COMPOSE_FILE" exec -T db \
-  sh -lc 'mariadb -uroot -p"$MYSQL_ROOT_PASSWORD" -e "
+  sh -lc 'mariadb -uroot -p"$MARIADB_ROOT_PASSWORD" -e "
     DROP DATABASE IF EXISTS kanboard;
     CREATE DATABASE kanboard CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
   "'
@@ -21,6 +21,6 @@ docker compose -f "$COMPOSE_FILE" exec -T db \
 echo "Restoring baseline database from: $BACKUP_FILE"
 
 docker compose -f "$COMPOSE_FILE" exec -T db \
-  sh -lc 'mariadb -uroot -p"$MYSQL_ROOT_PASSWORD" kanboard' < "$BACKUP_FILE"
+  sh -lc 'mariadb -uroot -p"$MARIADB_ROOT_PASSWORD" kanboard' < "$BACKUP_FILE"
 
 echo "Baseline restore completed successfully."

@@ -21,14 +21,14 @@ services:
     restart: always
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: root-secret
-      MYSQL_DATABASE: kanboard
-      MYSQL_USER: kanboard
-      MYSQL_PASSWORD: kanboard-secret
+      MARIADB_ROOT_PASSWORD: root-secret
+      MARIADB_DATABASE: kanboard
+      MARIADB_USER: kanboard
+      MARIADB_PASSWORD: kanboard-secret
     volumes:
       - kanboard_db:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
       interval: 10s
       timeout: 5s
       retries: 5
