@@ -40,7 +40,7 @@ pipeline {
             steps {
                 sh '''
                     for i in $(seq 1 30); do
-                      docker compose -f "$COMPOSE_FILE" exec -T db sh -lc 'mariadb-admin ping -uroot -p"$MYSQL_ROOT_PASSWORD" --silent' && exit 0
+                      docker compose -f "$COMPOSE_FILE" exec -T db sh -lc 'mariadb-admin ping -h127.0.0.1 -uroot -p"$MARIADB_ROOT_PASSWORD" --silent' && exit 0
                       sleep 2
                     done
                     echo "DB did not become ready in time."

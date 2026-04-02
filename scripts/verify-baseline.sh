@@ -10,7 +10,7 @@ curl -fsS "$BASE_URL/" >/dev/null
 
 echo "Checking seeded users..."
 USER_COUNT=$(docker compose -f "$COMPOSE_FILE" exec -T db sh -lc \
-  'mariadb -N -uroot -p"$MYSQL_ROOT_PASSWORD" kanboard -e "SELECT COUNT(*) FROM users WHERE username IN (\"admin\",\"u_manager\",\"u_user\",\"u_pm\",\"u_mem\",\"u_view\",\"u_cust\");"' \
+  'mariadb -N -h127.0.0.1 -uroot -p"$MARIADB_ROOT_PASSWORD" kanboard -e "SELECT COUNT(*) FROM users WHERE username IN (\"admin\",\"u_manager\",\"u_user\",\"u_pm\",\"u_mem\",\"u_view\",\"u_cust\");"' \
   | tr -d '\r')
 
 if [[ "$USER_COUNT" != "7" ]]; then
@@ -20,7 +20,7 @@ fi
 
 echo "Checking seeded projects..."
 PROJECT_COUNT=$(docker compose -f "$COMPOSE_FILE" exec -T db sh -lc \
-  'mariadb -N -uroot -p"$MYSQL_ROOT_PASSWORD" kanboard -e "SELECT COUNT(*) FROM projects WHERE name IN (\"TP1\",\"PP1\");"' \
+  'mariadb -N -h127.0.0.1 -uroot -p"$MARIADB_ROOT_PASSWORD" kanboard -e "SELECT COUNT(*) FROM projects WHERE name IN (\"TP1\",\"PP1\");"' \
   | tr -d '\r')
 
 if [[ "$PROJECT_COUNT" != "2" ]]; then
