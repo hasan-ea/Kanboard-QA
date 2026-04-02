@@ -2,10 +2,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="Kanboard QA Suite" verbose="1" parallel="false">
-    <listeners>
-        <listener class-name="com.kanboard.tests.base.BaselineExecutionListener"/>
-    </listeners>
-
     <suite-files>
         <suite-file path="modules/project-management/testng-project-management.xml"/>
     </suite-files>

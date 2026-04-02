@@ -3,7 +3,6 @@ name: kanboard
 services:
   app:
     image: kanboard/kanboard:v1.2.51
-    container_name: kanboard-app
     restart: always
     ports:
       - "8080:80"
@@ -16,10 +15,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - qa-net
 
   db:
     image: mariadb:lts
-    container_name: kanboard-db
     restart: always
     command: --default-authentication-plugin=mysql_native_password
     environment:
@@ -34,8 +34,14 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - qa-net
 
 volumes:
   kanboard_data:
   kanboard_plugins:
   kanboard_db:
+
+networks:
+  qa-net:
+    external: true
