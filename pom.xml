@@ -13,6 +13,8 @@
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <surefire.suiteXmlFiles>src/test/resources/suites/testng.xml</surefire.suiteXmlFiles>
+
         <selenium.version>4.41.0</selenium.version>
         <testng.version>7.12.0</testng.version>
         <restassured.version>5.5.6</restassured.version>
@@ -79,7 +81,7 @@
                 <version>3.5.5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${surefire.suiteXmlFiles}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <browser>${browser}</browser>

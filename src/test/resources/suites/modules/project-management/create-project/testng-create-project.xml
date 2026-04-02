@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Create Project Suite" verbose="1" parallel="false">
+
+    <test name="Create Project Regression" preserve-order="true">
+        <classes>
+            <class name="com.kanboard.tests.ui.projectmanagement.createproject.TC_PM_CP_001_CreateTeamProjectAuthorizedRolesTest"/>
+            <class name="com.kanboard.tests.ui.projectmanagement.createproject.TC_PM_CP_002_CreatePersonalProjectStandardUserTest"/>
+            <class name="com.kanboard.tests.ui.projectmanagement.createproject.TC_PM_CP_003_CreateTeamProjectVisibilityAfterSuccessTest"/>
+            <class name="com.kanboard.tests.ui.projectmanagement.createproject.TC_PM_CP_004_CreateProjectVisibilityTest"/>
+            <class name="com.kanboard.tests.ui.projectmanagement.createproject.TC_PM_CP_005_CreateUnauthorizedTeamProjectTest"/>
+            <class name="com.kanboard.tests.api.projectmanagement.createproject.TC_PM_CP_006_CreateProjectUnauthorizedUserApiTest"/>
+            <class name="com.kanboard.tests.ui.projectmanagement.createproject.TC_PM_CP_007_CreateProjectEmptyNameValidationTest"/>
+        </classes>
+    </test>
+
+</suite>
