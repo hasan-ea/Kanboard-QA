@@ -13,7 +13,7 @@ pipeline {
 
     environment {
         COMPOSE_FILE = 'docker-compose.yml'
-        BASE_URL = 'http://localhost:8080'
+        BASE_URL = 'http://host.docker.internal:8080'
     }
 
     stages {
