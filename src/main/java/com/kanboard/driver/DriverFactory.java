@@ -13,33 +13,34 @@ public class DriverFactory {
         String browser = System.getProperty("browser", "chrome");
         boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
-        // Şimdilik sadece Chrome destekleniyor.
         if (!browser.equalsIgnoreCase("chrome")) {
             throw new IllegalArgumentException("Currently only chrome is supported. Actual: " + browser);
         }
 
         ChromeOptions options = new ChromeOptions();
 
-        // İstenirse tarayıcı görünmeden çalıştırılır.
+        String chromeBinary = System.getenv("CHROME_BIN");
+        if (chromeBinary != null && !chromeBinary.isBlank()) {
+            options.setBinary(chromeBinary);
+        }
+
         if (headless) {
             options.addArguments("--headless=new");
         }
 
-        options.addArguments("--start-maximized");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
 
         WebDriver driver = new ChromeDriver(options);
 
-        // Sayfa yüklenmesi için üst sınır.
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-
-        // Explicit wait kullandığımız için implicit wait kapalı tutuldu.
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 
         return driver;
     }
 
     public static void quitDriver(WebDriver driver) {
-        // Null kontrolü ile güvenli kapatma yapılır.
         if (driver != null) {
             driver.quit();
         }
