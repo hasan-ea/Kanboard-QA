@@ -32,19 +32,7 @@ pipeline {
         stage('Resolve Base URL') {
             steps {
                 script {
-                    def dockerHostIp = sh(
-                        script: '''
-                            set -e
-                            ip route | awk '/default/ { print $3; exit }'
-                        ''',
-                        returnStdout: true
-                    ).trim()
-
-                    if (!dockerHostIp) {
-                        error('Docker host gateway IP could not be resolved.')
-                    }
-
-                    env.BASE_URL = "http://${dockerHostIp}:8080"
+                    env.BASE_URL = 'http://host.docker.internal:8080'
                     echo "Resolved BASE_URL=${env.BASE_URL}"
                 }
             }
@@ -85,7 +73,7 @@ pipeline {
             steps {
                 sh '''
                     for i in $(seq 1 30); do
-                      curl -fsS "$BASE_URL" >/dev/null && exit 0
+                      curl --connect-timeout 5 --max-time 10 -fsS "$BASE_URL" >/dev/null && exit 0
                       sleep 2
                     done
                     echo "App did not become ready in time."
