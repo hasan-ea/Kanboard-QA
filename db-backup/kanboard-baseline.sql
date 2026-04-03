@@ -28,7 +28,7 @@ LOCK TABLES action_has_params WRITE;
 /*!40000 ALTER TABLE action_has_params ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table actions
 --
 DROP TABLE IF EXISTS actions;
@@ -44,7 +44,7 @@ LOCK TABLES actions WRITE;
 /*!40000 ALTER TABLE actions ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table column_has_move_restrictions
 --
 DROP TABLE IF EXISTS column_has_move_restrictions;
@@ -60,7 +60,7 @@ LOCK TABLES column_has_move_restrictions WRITE;
 /*!40000 ALTER TABLE column_has_move_restrictions ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table column_has_restrictions
 --
 DROP TABLE IF EXISTS column_has_restrictions;
@@ -76,7 +76,7 @@ LOCK TABLES column_has_restrictions WRITE;
 /*!40000 ALTER TABLE column_has_restrictions ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table columns
 --
 DROP TABLE IF EXISTS columns;
@@ -93,7 +93,7 @@ INSERT INTO columns VALUES (1,'Backlog',1,1,0,'',0), (2,'Ready',2,1,0,'',0), (3,
 /*!40000 ALTER TABLE columns ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table comments
 --
 DROP TABLE IF EXISTS comments;
@@ -109,7 +109,7 @@ LOCK TABLES comments WRITE;
 /*!40000 ALTER TABLE comments ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table currencies
 --
 DROP TABLE IF EXISTS currencies;
@@ -125,7 +125,7 @@ LOCK TABLES currencies WRITE;
 /*!40000 ALTER TABLE currencies ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table custom_filters
 --
 DROP TABLE IF EXISTS custom_filters;
@@ -141,7 +141,7 @@ LOCK TABLES custom_filters WRITE;
 /*!40000 ALTER TABLE custom_filters ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table group_has_users
 --
 DROP TABLE IF EXISTS group_has_users;
@@ -157,7 +157,7 @@ LOCK TABLES group_has_users WRITE;
 /*!40000 ALTER TABLE group_has_users ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table groups
 --
 DROP TABLE IF EXISTS groups;
@@ -173,7 +173,7 @@ LOCK TABLES groups WRITE;
 /*!40000 ALTER TABLE groups ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table invites
 --
 DROP TABLE IF EXISTS invites;
@@ -189,7 +189,7 @@ LOCK TABLES invites WRITE;
 /*!40000 ALTER TABLE invites ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table last_logins
 --
 DROP TABLE IF EXISTS last_logins;
@@ -210,7 +210,7 @@ x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',1773
 /*!40000 ALTER TABLE last_logins ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table links
 --
 DROP TABLE IF EXISTS links;
@@ -227,7 +227,7 @@ INSERT INTO links VALUES (1,'relates to',0), (2,'blocks',3), (3,'is blocked by',
 /*!40000 ALTER TABLE links ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table password_reset
 --
 DROP TABLE IF EXISTS password_reset;
@@ -243,7 +243,7 @@ LOCK TABLES password_reset WRITE;
 /*!40000 ALTER TABLE password_reset ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table plugin_schema_versions
 --
 DROP TABLE IF EXISTS plugin_schema_versions;
@@ -259,7 +259,7 @@ LOCK TABLES plugin_schema_versions WRITE;
 /*!40000 ALTER TABLE plugin_schema_versions ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table predefined_task_descriptions
 --
 DROP TABLE IF EXISTS predefined_task_descriptions;
@@ -275,7 +275,7 @@ LOCK TABLES predefined_task_descriptions WRITE;
 /*!40000 ALTER TABLE predefined_task_descriptions ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_activities
 --
 DROP TABLE IF EXISTS project_activities;
@@ -291,7 +291,7 @@ LOCK TABLES project_activities WRITE;
 /*!40000 ALTER TABLE project_activities ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_daily_column_stats
 --
 DROP TABLE IF EXISTS project_daily_column_stats;
@@ -307,7 +307,7 @@ LOCK TABLES project_daily_column_stats WRITE;
 /*!40000 ALTER TABLE project_daily_column_stats ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_daily_stats
 --
 DROP TABLE IF EXISTS project_daily_stats;
@@ -323,7 +323,7 @@ LOCK TABLES project_daily_stats WRITE;
 /*!40000 ALTER TABLE project_daily_stats ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_has_categories
 --
 DROP TABLE IF EXISTS project_has_categories;
@@ -339,7 +339,7 @@ LOCK TABLES project_has_categories WRITE;
 /*!40000 ALTER TABLE project_has_categories ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_has_files
 --
 DROP TABLE IF EXISTS project_has_files;
@@ -355,7 +355,7 @@ LOCK TABLES project_has_files WRITE;
 /*!40000 ALTER TABLE project_has_files ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_has_groups
 --
 DROP TABLE IF EXISTS project_has_groups;
@@ -371,7 +371,7 @@ LOCK TABLES project_has_groups WRITE;
 /*!40000 ALTER TABLE project_has_groups ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_has_metadata
 --
 DROP TABLE IF EXISTS project_has_metadata;
@@ -387,7 +387,7 @@ LOCK TABLES project_has_metadata WRITE;
 /*!40000 ALTER TABLE project_has_metadata ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_has_notification_types
 --
 DROP TABLE IF EXISTS project_has_notification_types;
@@ -403,7 +403,7 @@ LOCK TABLES project_has_notification_types WRITE;
 /*!40000 ALTER TABLE project_has_notification_types ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_has_roles
 --
 DROP TABLE IF EXISTS project_has_roles;
@@ -419,7 +419,7 @@ LOCK TABLES project_has_roles WRITE;
 /*!40000 ALTER TABLE project_has_roles ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_has_users
 --
 DROP TABLE IF EXISTS project_has_users;
@@ -436,7 +436,7 @@ INSERT INTO project_has_users VALUES (1,1,'project-manager'), (1,4,'project-mana
 /*!40000 ALTER TABLE project_has_users ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table project_role_has_restrictions
 --
 DROP TABLE IF EXISTS project_role_has_restrictions;
@@ -452,7 +452,7 @@ LOCK TABLES project_role_has_restrictions WRITE;
 /*!40000 ALTER TABLE project_role_has_restrictions ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table projects
 --
 DROP TABLE IF EXISTS projects;
@@ -469,7 +469,7 @@ INSERT INTO projects VALUES (1,'TP1',1,'',1773411796,0,0,NULL,'','','',1,0,0,3,N
 /*!40000 ALTER TABLE projects ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table remember_me
 --
 DROP TABLE IF EXISTS remember_me;
@@ -488,7 +488,7 @@ x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36','680
 /*!40000 ALTER TABLE remember_me ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table schema_version
 --
 DROP TABLE IF EXISTS schema_version;
@@ -505,7 +505,7 @@ INSERT INTO schema_version VALUES (139);
 /*!40000 ALTER TABLE schema_version ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table sessions
 --
 DROP TABLE IF EXISTS sessions;
@@ -522,7 +522,7 @@ INSERT INTO sessions VALUES ('0267a293d8ce067c7d574ef27b3d3b15',1773416198,'a:6:
 /*!40000 ALTER TABLE sessions ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table settings
 --
 DROP TABLE IF EXISTS settings;
@@ -539,7 +539,7 @@ INSERT INTO settings VALUES ('api_token','9997c2070525b0f2c87231d82f184fd0f98c27
 /*!40000 ALTER TABLE settings ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table subtask_time_tracking
 --
 DROP TABLE IF EXISTS subtask_time_tracking;
@@ -555,7 +555,7 @@ LOCK TABLES subtask_time_tracking WRITE;
 /*!40000 ALTER TABLE subtask_time_tracking ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table subtasks
 --
 DROP TABLE IF EXISTS subtasks;
@@ -571,7 +571,7 @@ LOCK TABLES subtasks WRITE;
 /*!40000 ALTER TABLE subtasks ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table swimlanes
 --
 DROP TABLE IF EXISTS swimlanes;
@@ -588,7 +588,7 @@ INSERT INTO swimlanes VALUES (1,'Default swimlane',1,1,1,'',0), (2,'Default swim
 /*!40000 ALTER TABLE swimlanes ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table tags
 --
 DROP TABLE IF EXISTS tags;
@@ -604,7 +604,7 @@ LOCK TABLES tags WRITE;
 /*!40000 ALTER TABLE tags ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table task_has_external_links
 --
 DROP TABLE IF EXISTS task_has_external_links;
@@ -620,7 +620,7 @@ LOCK TABLES task_has_external_links WRITE;
 /*!40000 ALTER TABLE task_has_external_links ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table task_has_files
 --
 DROP TABLE IF EXISTS task_has_files;
@@ -636,7 +636,7 @@ LOCK TABLES task_has_files WRITE;
 /*!40000 ALTER TABLE task_has_files ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table task_has_links
 --
 DROP TABLE IF EXISTS task_has_links;
@@ -652,7 +652,7 @@ LOCK TABLES task_has_links WRITE;
 /*!40000 ALTER TABLE task_has_links ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table task_has_metadata
 --
 DROP TABLE IF EXISTS task_has_metadata;
@@ -668,7 +668,7 @@ LOCK TABLES task_has_metadata WRITE;
 /*!40000 ALTER TABLE task_has_metadata ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table task_has_tags
 --
 DROP TABLE IF EXISTS task_has_tags;
@@ -684,7 +684,7 @@ LOCK TABLES task_has_tags WRITE;
 /*!40000 ALTER TABLE task_has_tags ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table tasks
 --
 DROP TABLE IF EXISTS tasks;
@@ -700,7 +700,7 @@ LOCK TABLES tasks WRITE;
 /*!40000 ALTER TABLE tasks ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table transitions
 --
 DROP TABLE IF EXISTS transitions;
@@ -716,7 +716,7 @@ LOCK TABLES transitions WRITE;
 /*!40000 ALTER TABLE transitions ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table user_has_metadata
 --
 DROP TABLE IF EXISTS user_has_metadata;
@@ -732,7 +732,7 @@ LOCK TABLES user_has_metadata WRITE;
 /*!40000 ALTER TABLE user_has_metadata ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table user_has_notification_types
 --
 DROP TABLE IF EXISTS user_has_notification_types;
@@ -748,7 +748,7 @@ LOCK TABLES user_has_notification_types WRITE;
 /*!40000 ALTER TABLE user_has_notification_types ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table user_has_notifications
 --
 DROP TABLE IF EXISTS user_has_notifications;
@@ -764,7 +764,7 @@ LOCK TABLES user_has_notifications WRITE;
 /*!40000 ALTER TABLE user_has_notifications ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table user_has_unread_notifications
 --
 DROP TABLE IF EXISTS user_has_unread_notifications;
@@ -780,7 +780,7 @@ LOCK TABLES user_has_unread_notifications WRITE;
 /*!40000 ALTER TABLE user_has_unread_notifications ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 -- -- Table structure for table users
 --
 DROP TABLE IF EXISTS users;
@@ -797,7 +797,7 @@ INSERT INTO users VALUES (1,'admin','$2y$12$v20YqFOdj1CTd/Kr4NNXAOtRM2E6a3uEK/rX
 /*!40000 ALTER TABLE users ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+SET AUTOCOMMIT=1;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

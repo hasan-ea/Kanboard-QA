@@ -25,7 +25,7 @@ done
 echo "Creating clean baseline database dump..."
 
 docker compose -f "$COMPOSE_FILE" exec -T db \
-  sh -lc "mariadb-dump -uroot -p\"\$MYSQL_ROOT_PASSWORD\" \
+  sh -lc "mariadb-dump -uroot -p\"\$MARIADB_ROOT_PASSWORD\" \
     --databases kanboard \
     --add-drop-database \
     --single-transaction \
@@ -34,5 +34,7 @@ docker compose -f "$COMPOSE_FILE" exec -T db \
     --triggers \
     ${IGNORE_ARGS}" \
   > "$BACKUP_FILE"
+
+sed -i 's/SET AUTOCOMMIT=@OLD_AUTOCOMMIT;/SET AUTOCOMMIT=1;/g' "$BACKUP_FILE"
 
 echo "Baseline dump created successfully: $BACKUP_FILE"
