@@ -33,9 +33,16 @@ pipeline {
             steps {
                 script {
                     def dockerHostIp = sh(
-                        script: "ip route | awk '/default/ { print \$3 }'",
+                        script: '''
+                            set -e
+                            ip route | awk '/default/ { print $3; exit }'
+                        ''',
                         returnStdout: true
                     ).trim()
+
+                    if (!dockerHostIp) {
+                        error('Docker host gateway IP could not be resolved.')
+                    }
 
                     env.BASE_URL = "http://${dockerHostIp}:8080"
                     echo "Resolved BASE_URL=${env.BASE_URL}"

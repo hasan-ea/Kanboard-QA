@@ -37,4 +37,9 @@ docker compose -f "$COMPOSE_FILE" exec -T db \
 
 sed -i 's/SET AUTOCOMMIT=@OLD_AUTOCOMMIT;/SET AUTOCOMMIT=1;/g' "$BACKUP_FILE"
 
+sed -E -i \
+  -e "s/\('api_token','[^']*'/('api_token','baseline-api-token'/g" \
+  -e "s/\('webhook_token','[^']*'/('webhook_token','baseline-webhook-token'/g" \
+  "$BACKUP_FILE"
+
 echo "Baseline dump created successfully: $BACKUP_FILE"
