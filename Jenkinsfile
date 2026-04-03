@@ -13,7 +13,6 @@ pipeline {
 
     environment {
         COMPOSE_FILE = 'docker-compose.yml'
-        BASE_URL = 'http://host.docker.internal:8080'
     }
 
     stages {
@@ -27,6 +26,20 @@ pipeline {
             steps {
                 sh 'chmod +x mvnw || true'
                 sh 'chmod +x scripts/*.sh || true'
+            }
+        }
+
+        stage('Resolve Base URL') {
+            steps {
+                script {
+                    def dockerHostIp = sh(
+                        script: "ip route | awk '/default/ { print \$3 }'",
+                        returnStdout: true
+                    ).trim()
+
+                    env.BASE_URL = "http://${dockerHostIp}:8080"
+                    echo "Resolved BASE_URL=${env.BASE_URL}"
+                }
             }
         }
 
