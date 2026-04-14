@@ -1,79 +1,168 @@
 # Kanboard-QA
 
-Kanboard uygulaması üzerinde modül bazlı ilerleyen, uçtan uca QA odaklı bir test mühendisliği projesidir.
+Kanboard üzerinde hazırlanmış, modül bazlı ilerleyen uçtan uca QA portföy projesidir.
 
-Bu proje yalnızca test otomasyonu üretmek için değil; iş analizi, test kapsamı belirleme, senaryo tasarımı, test case yazımı, manuel test yaklaşımı, UI otomasyon ve API doğrulama mantığını birlikte göstermek için hazırlanmıştır.
+Bu repo yalnızca UI test otomasyonu göstermek için değil;  
+**iş analizi → test senaryosu → test case → UI/API otomasyon → CI düşüncesi** zincirini izlenebilir ve profesyonel şekilde sunmak için hazırlanmıştır.
+
+Amaç, çok sayıda yüzeysel modül göstermek değil;  
+**daha az modülle daha güçlü test tasarımı, daha temiz otomasyon yapısı ve daha iyi traceability** sunmaktır.
 
 ---
 
 ## Projenin Amacı
 
-Bu çalışmanın amacı, Kanboard üzerinde gerçek bir QA süreci kurgulayarak aşağıdaki alanlarda izlenebilir bir yapı oluşturmaktır:
+Bu proje ile şu alanlarda görünür ve sürdürülebilir bir QA yapısı kurmak hedeflenmiştir:
 
 - business analysis (BA) çalışması
 - modül bazlı test kapsamı oluşturma
-- test senaryoları ve test case dokümantasyonu
-- UI test otomasyonu
+- scenario ve test case dokümantasyonu
+- UI otomasyon
 - API doğrulama yaklaşımı
+- deterministic test environment yönetimi
 - traceability odaklı test tasarımı
-- sürdürülebilir ve geliştirilebilir bir automation framework
+- CI/CD’ye bağlanabilir framework temeli
 
-Bu repo bir "tek seferlik script" çalışması değil; modül bazlı büyüyebilen, sade ama profesyonel bir QA portföy projesi olarak tasarlanmıştır.
+Bu nedenle repo, tek seferlik script mantığıyla değil;  
+**büyüyebilen ama kontrolsüz genişlemeyen** bir QA mühendisliği çalışması olarak kurgulanmıştır.
 
 ---
 
-## Mevcut Kapsam
+## Mevcut Durum
 
 ### Tamamlanan Modül
+
 **Project Management > Create Project**
 
 Bu modül için şu çalışmalar tamamlanmıştır:
 
-- BA analizi hazırlandı
-- test senaryoları üretildi
-- test case dokümanı oluşturuldu
-- UI ve API açısından otomasyona uygun kapsam netleştirildi
-- toplam **8 test case** otomasyona alındı
-    - **7 UI test**
-    - **1 API test**
+- BA analizi
+- test scenario dokümanı
+- test case dokümanı
+- UI ve API otomasyon kapsamı
+- regression suite
+- observation / known issue suite
+- deterministic baseline restore ve verify yaklaşımı
+- Jenkins pipeline temeli
 
-### Seçili Scope Yaklaşımı
-Başlangıçta proje daha geniş düşünülmüş olsa da, portföyde kaliteyi artırmak için kapsam kontrollü şekilde daraltılmıştır.
+### Mevcut Otomasyon Kapsamı
 
-Bu repo finalde **2 modül** üzerinden ilerleyecektir:
+Create Project modülünde toplam **8 test case** otomasyona alınmıştır:
 
-1. **Create Project**
-2. **Project Type / Access Behavior** *(planlanan ikinci modül)*
+- **7 UI test**
+- **1 API test**
 
-Bu tercih bilinçlidir. Amaç, çok fazla modülü yüzeysel göstermek yerine daha az modülü daha sağlam, izlenebilir ve profesyonel şekilde sunmaktır.
+Kapsam yalnızca happy path ile sınırlı değildir.  
+Ağırlıklı olarak şu risk alanları hedeflenmiştir:
+
+- authorized create behavior
+- unauthorized create attempt
+- validation behavior
+- post-create visibility
+- UI/API consistency
+- observation-level known issue coverage
+
+---
+
+## Neden Scope Bilinçli Şekilde Dar Tutuldu?
+
+Bu repo bilinçli olarak sınırlı scope ile ilerlemektedir.
+
+Amaç:
+
+- çok modül yazmış görünmek değil,
+- seçilen modülleri daha sağlam dokümante etmek,
+- otomasyonu daha sürdürülebilir kurmak,
+- mülakatta “neden böyle tasarlandı?” sorusuna güçlü cevap verebilmektir.
+
+Bu nedenle proje şu aşamada **az ama güçlü modül** yaklaşımını izlemektedir.
 
 ---
 
 ## Test Yaklaşımı
 
-Projede aşağıdaki yaklaşım benimsenmiştir:
+Projede aşağıdaki prensipler benimsenmiştir:
 
 - modül bazlı ilerleme
-- requirement / business rule odaklı düşünme
+- business rule / requirement odaklı düşünme
 - scenario → test case → automation zinciri
-- core regression ve extended coverage ayrımı
-- UI ve API doğrulamalarını mantıklı şekilde ayırma
-- gerektiğinde hybrid doğrulama kullanma
-- authorization, validation, visibility ve data integrity risklerini dikkate alma
+- UI ve API katmanlarını mantıklı ayırma
+- gerekli yerde hybrid doğrulama kullanma
+- authorization, validation, visibility ve persistence risklerini öne alma
+- core regression ile observation coverage ayrımını koruma
+- mümkün olduğunca tekrar koşulabilir ve deterministic test yapısı kurma
+
+---
+
+## Traceability Yaklaşımı
+
+Bu repo için traceability önemli bir tasarım hedefidir.
+
+Örnek iz:
+
+- **Business Rule / Analysis**
+- **Scenario ID** → `PM-CP-###`
+- **Test Case ID** → `TC-PM-CP-###`
+- **Automation Class** → ilgili test case ile hizalı class adı
+- **TestNG Description** → test case ve scenario referansı
+
+Bu yapı sayesinde doküman ile otomasyon arasındaki bağ görünür tutulur.
 
 ---
 
 ## Teknik Stack
 
-- **Java**
+- **Java 17**
 - **Selenium**
 - **TestNG**
 - **Maven**
 - **Page Object Model (POM)**
 - **Rest Assured**
-- **JSON-RPC API test yaklaşımı**
+- **JSON-RPC API yaklaşımı**
 - **Docker / Docker Compose**
-- **Logback / SLF4J**
+- **Jenkins**
+- **SLF4J / Logback**
+
+---
+
+## Deterministic Environment Yaklaşımı
+
+Projede test ortamı mümkün olduğunca tekrar üretilebilir olacak şekilde kurgulanmıştır.
+
+Temel yaklaşım:
+
+- Kanboard uygulaması Docker ile ayağa kaldırılır
+- MariaDB container kullanılır
+- baseline veri seti saklanır
+- test öncesi baseline restore edilebilir
+- restore sonrası environment verify edilir
+
+Bu sayede test koşumları yalnızca “uygulama ayakta mı?” seviyesinde değil,  
+**beklenen başlangıç verisi mevcut mu?** seviyesinde de kontrol edilir.
+
+İlgili scriptler:
+
+- `scripts/create-baseline-dump.sh`
+- `scripts/restore-baseline.sh`
+- `scripts/verify-baseline.sh`
+
+---
+
+## Test Data ve Konfigürasyon
+
+Repo içinde örnek credential dosyası bulunur:
+
+- `src/test/resources/config/credentials.example.properties`
+
+Gerçek local credential dosyası repoya dahil edilmez:
+
+- `src/test/resources/config/credentials.local.properties`
+
+Bu yaklaşım sayesinde:
+
+- hassas veriler repoya yazılmaz
+- local ve CI ortamı ayrılabilir
+- aynı framework farklı execution ortamlarında kullanılabilir
 
 ---
 
@@ -82,125 +171,167 @@ Projede aşağıdaki yaklaşım benimsenmiştir:
 ```text
 Kanboard-QA/
 ├─ docs/
+│  ├─ analysis/
+│  ├─ bug-reports/
+│  ├─ project-management/
+│  └─ test-strategy/
+├─ db-backup/
 ├─ scripts/
 ├─ src/
-│  ├─ main/
-│  │  └─ java/com/kanboard/
-│  │     ├─ api/
-│  │     ├─ base/
-│  │     ├─ driver/
-│  │     ├─ models/
-│  │     ├─ pages/
-│  │     └─ utils/
+│  ├─ main/java/com/kanboard/
+│  │  ├─ api/
+│  │  ├─ base/
+│  │  ├─ driver/
+│  │  ├─ models/
+│  │  ├─ pages/
+│  │  └─ utils/
 │  └─ test/
 │     ├─ java/com/kanboard/tests/
 │     │  ├─ base/
-│     │  ├─ ui/projectmanagement/createproject/
-│     │  └─ api/projectmanagement/createproject/
+│     │  ├─ api/
+│     │  └─ ui/
 │     └─ resources/
 │        ├─ config/
 │        ├─ suites/
 │        └─ testdata/
+├─ Dockerfile.jenkins
+├─ Jenkinsfile
 ├─ docker-compose.yml
 ├─ pom.xml
+├─ mvnw
 └─ README.md
 ```
 
 ---
 
+## Nasıl Çalıştırılır?
+
+> Aşağıdaki örnekler shell tabanlı komutlarla verilmiştir.
+
+### 1. Ortamı başlat
+
+```bash
+docker compose up -d db
+./scripts/restore-baseline.sh
+docker compose up -d app
+./scripts/verify-baseline.sh
+```
+
+### 2. Credential dosyasını hazırla
+
+Örnek dosyayı baz alarak local credential dosyanı oluştur:
+
+```bash
+cp src/test/resources/config/credentials.example.properties src/test/resources/config/credentials.local.properties
+```
+
+### 3. Regression suite çalıştır
+
+```bash
+./mvnw test \
+  -Dbrowser=chrome \
+  -Dheadless=false \
+  -Dbase.url=http://localhost:8080
+```
+
+### 4. Observation suite çalıştır
+
+```bash
+./mvnw test \
+  -Dsurefire.suiteXmlFiles=src/test/resources/suites/modules/project-management/create-project/testng-create-project-observation.xml \
+  -Dbrowser=chrome \
+  -Dheadless=false \
+  -Dbase.url=http://localhost:8080
+```
+
+---
+
+## CI / Jenkins
+
+Repo içinde Jenkins pipeline tanımı bulunmaktadır.
+
+Pipeline akışında temel olarak şu adımlar yer alır:
+
+- checkout
+- tooling hazırlığı
+- Docker environment başlatma
+- DB readiness kontrolü
+- baseline restore
+- app readiness kontrolü
+- environment verify
+- regression suite çalıştırma
+- isteğe bağlı observation suite çalıştırma
+- surefire report ve docker log artifact arşivleme
+
+Bu yapı henüz “kurumsal ölçekte tam CI platformu” iddiası taşımaz;  
+ancak portföy seviyesi için **tekrar üretilebilir test koşumu ve pipeline düşüncesi** göstermeyi hedefler.
+
+---
+
 ## Dokümantasyon Yapısı
 
-Create Project modülü için dokümantasyon 3 katmanda hazırlanmıştır:
+Mevcut modül için dokümantasyon şu katmanlarda hazırlanmıştır:
 
-1. **BA / Test Analizi**
+1. **BA / Test Analysis**
 2. **Test Scenarios**
 3. **Test Cases**
+4. **Bug Report / Observation Notes** *(uygunsa)*
 
-Bu yapı sayesinde aşağıdaki izlenebilirlik hedeflenmiştir:
-
-- iş kuralı → senaryo
-- senaryo → test case
-- test case → otomasyon
+Bu sayede repo yalnızca kod değil,  
+**neden o testlerin yazıldığına dair karar sürecini de** gösterebilir.
 
 ---
 
-## Otomasyon Kapsamı
+## Known Issue / Observation Mantığı
 
-Şu an otomasyona alınan alanlar ağırlıklı olarak şu riskleri hedeflemektedir:
+Tüm testler ana regression suite içinde tutulmamaktadır.
 
-- authorized create behavior
-- unauthorized create attempt
-- validation davranışı
-- create sonrası visibility
-- UI ve API consistency kontrolü
+Beklenen ürün davranışı net değilse veya mevcut davranış bug / observation niteliğindeyse,  
+ilgili kapsam ayrı suite altında izole edilir.
 
-Bu yaklaşım sayesinde otomasyon yalnızca happy path ile sınırlı kalmamıştır.
+Bu yaklaşımın amacı:
 
----
-
-## Ortam Kurulumu
-
-Projede test ortamı Docker Compose ile ayağa kaldırılmaktadır.
-
-Genel akış:
-
-1. Kanboard ve veritabanı container’larını başlat
-2. test konfigürasyon dosyalarını hazırla
-3. ilgili suite üzerinden testleri çalıştır
-
-> Not: Bu repo portföy odaklı bir QA çalışmasıdır. Ortam ve veri yönetimi zaman içinde CI/CD uyumlu hale getirilecek şekilde geliştirilmektedir.
+- ana regression güvenini korumak
+- gözlemsel coverage’i kaybetmemek
+- known issue ile gerçek regression kapsamını karıştırmamaktır
 
 ---
 
-## Hedeflenen Sonraki Adımlar
+## Şu Anki Konumlandırma
 
-- ikinci modülün BA, scenario ve case dokümanlarını hazırlamak
-- ikinci modülün UI/API otomasyon kapsamını oluşturmak
-- test suite yapısını modül bazlı netleştirmek
-- Jenkins ile CI sürecine bağlamak
-- raporlama ve execution görünürlüğünü iyileştirmek
-- framework yapısını daha CI-friendly hale getirmek
+Bu repo, “çok test yazılmış demo proje” olmaktan çok şu konuları göstermek için hazırlanmıştır:
 
----
-
-## CI/CD Hedefi
-
-Bu proje için hedeflenen CI yaklaşımı:
-
-- Jenkins ile otomatik test tetikleme
-- modül bazlı suite koşumu
-- build + test sonucu görünürlüğü
-- ileride smoke / regression ayrımı ile pipeline kurgusu
-
-Şu an öncelik, modül bazlı test tasarımını ve framework temelini doğru oturtmaktır.
-
----
-
-## Bu Projeyi Nasıl Konumluyorum?
-
-Bu repo, çok sayıda test yazılmış bir demo proje olmaktan çok, şu konuları göstermek için hazırlanmıştır:
-
-- kapsam yönetimi
 - QA analitik düşünce yapısı
-- test tasarım kalitesi
-- otomasyona uygun dokümantasyon
+- kapsam yönetimi
+- modül bazlı test tasarımı
 - traceability
-- sürdürülebilir framework yaklaşımı
-
-Amaç, az modülle daha güçlü ve daha profesyonel bir kalite algısı oluşturmaktır.
-
----
-
-## AI Kullanım Notu
-
-Bu proje tamamen gözü kapalı şekilde üretilmiş bir çalışma değildir.
-
-Analiz, kapsam yönetimi, modül seçimi, test yaklaşımı ve otomasyon yönü tarafımdan yönetilmiştir. Süreç içinde araştırma, alternatif çözüm üretimi, teknik doğrulama ve bazı geliştirme detaylarında AI destekli araçlardan yararlanılmıştır.
-
-Bu nedenle proje, yalnızca kod üretimine değil; karar verme, yapı kurma ve QA mantığını yönetme becerisine odaklı olarak değerlendirilmelidir.
+- sürdürülebilir automation framework yaklaşımı
+- deterministic environment mantığı
+- CI/CD’ye hazırlıklı test otomasyonu
 
 ---
 
-## İletişim
+## Sıradaki Adım
 
-GitHub profilim üzerinden benimle iletişime geçebilirsiniz.
+Planlanan ikinci modül:
+
+**Project Type / Access Behavior**
+
+Bu modülün seçilme nedeni:
+
+- mevcut Create Project modülünü doğal olarak tamamlaması
+- RBAC ve davranış farklarını görünür hale getirmesi
+- mevcut seeded user / role yapısını yeniden kullanabilmesi
+- portföy etkisinin yüksek olması
+
+---
+
+## Geliştirme Notu
+
+Bu proje tamamen kör şekilde üretilmiş bir çalışma değildir.
+
+Araştırma, alternatif çözüm denemeleri ve bazı teknik detaylarda AI destekli araçlardan yararlanılmıştır.  
+Ancak kapsam, öncelik, test yaklaşımı ve yapı kararları bilinçli şekilde yönetilmiştir.
+
+Odak, yalnızca kod üretmek değil;  
+**QA mantığını kurmak, sınır çizmek ve izlenebilir bir yapı ortaya koymaktır.**
