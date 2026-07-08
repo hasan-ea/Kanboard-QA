@@ -1,0 +1,62 @@
+name: Build 600 Hour Widget
+
+on:
+  push:
+    branches:
+      - temp/android-widget-build
+    paths:
+      - android-widget-source.b64
+      - .github/workflows/build-600-hour-widget.yml
+  pull_request:
+    branches:
+      - master
+    paths:
+      - android-widget-source.b64
+      - .github/workflows/build-600-hour-widget.yml
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore Android project
+        run: |
+          base64 --decode android-widget-source.b64 > android-widget-source.zip
+          unzip -q android-widget-source.zip
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platform
+        run: yes | sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Build debug APK
+        working-directory: ZamanlayiciWidget
+        run: gradle --no-daemon :app:assembleDebug
+
+      - name: Rename APK
+        run: cp ZamanlayiciWidget/app/build/outputs/apk/debug/app-debug.apk 600-Saat-Zamanlayici-Widget.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: 600-Saat-Zamanlayici-Widget
+          path: 600-Saat-Zamanlayici-Widget.apk
+          if-no-files-found: error
