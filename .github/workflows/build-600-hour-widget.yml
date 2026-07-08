@@ -7,6 +7,12 @@ on:
     paths:
       - android-widget-source.b64
       - .github/workflows/build-600-hour-widget.yml
+  pull_request:
+    branches:
+      - master
+    paths:
+      - android-widget-source.b64
+      - .github/workflows/build-600-hour-widget.yml
   workflow_dispatch:
 
 jobs:
